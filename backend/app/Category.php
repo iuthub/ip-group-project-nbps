@@ -10,4 +10,9 @@ class Category extends Model
         'title',
         'description'
     ];
+
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
 }
