@@ -8,9 +8,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Item::class, function (Faker $faker) {
     return [
-        'category_id' =>  function () {
-            return factory(Category::class)->create()->id;
-        },
+        'category_id' => Category::all()->random()->id,
         'title' => $faker->word,
         'description' => $faker->text,
         'price' => rand(2, 14) * 1000,

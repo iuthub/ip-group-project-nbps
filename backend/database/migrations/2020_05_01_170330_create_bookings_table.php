@@ -22,7 +22,7 @@ class CreateBookingsTable extends Migration
             $table->unsignedInteger('people_count');
             $table->timestamps();
 
-            $table->foreign('user_id    ')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('table_id')->references('id')->on('tables')->onDelete('cascade')->onUpdate('cascade');
         });
     }
