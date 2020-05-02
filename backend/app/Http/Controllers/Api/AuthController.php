@@ -17,11 +17,11 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
-        if ($token = Auth::guard()->attempt($credentials)) {
+        if ($token = Auth::guard('api')->attempt($credentials)) {
             return response()->json([
                 'access_token' => $token,
                 'token_type' => 'Bearer',
-                'expires_in' => Auth::guard()->factory()->getTTL() * 60
+                'expires_in' => Auth::guard('api')->factory()->getTTL() * 60
             ], 200);
         }
 
@@ -33,20 +33,20 @@ class AuthController extends Controller
     public function refresh()
     {
         return response()->json([
-            'access_token' => Auth::guard()->refresh(),
+            'access_token' => Auth::guard('api')->refresh(),
             'token_type' => 'Bearer',
-            'expires_in' => Auth::guard()->factory()->getTTL() * 60
+            'expires_in' => Auth::guard('api')->factory()->getTTL() * 60
         ], 200);
     }
 
     public function me()
     {
-        return response()->json(Auth::guard()->user());
+        return response()->json(Auth::guard('api')->user());
     }
 
     public function logout()
     {
-        Auth::guard()->logout();
+        Auth::guard('api')->logout();
 
         return response()->json(['message' => 'Successfully logged out']);
     }
