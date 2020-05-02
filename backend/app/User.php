@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Profile;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -19,6 +20,21 @@ class User extends Authenticatable implements JWTSubject
     protected $fillable = [
         'name', 'email', 'password',
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+        static::saved(function (User $user) {
+            if ($user->exists) {
+                $user->profile()->create();
+            }
+        });
+        static::deleted(function (User $user) {
+            if (!is_null($user->profile)) {
+                $user->profile->delete();
+            }
+        });
+    }
 
     /**
      * The attributes that should be hidden for arrays.
