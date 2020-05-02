@@ -4,15 +4,23 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Item extends Model
+class Item extends Elegant
 {
 
     protected $fillable = [
         'title',
         'description',
         'price',
-        'image'
     ];
+
+    public function rules()
+    {
+        return [
+            'title' => 'required',
+            'description' => 'required',
+            'price' => 'required|numeric',
+        ];
+    }
 
     public function category()
     {
