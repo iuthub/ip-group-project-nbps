@@ -3,21 +3,34 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login', 'signup']]);
     }
 
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
-        if ($token = Auth::guard('api')->attempt($credentials)) {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()->all()
+            ]);
+        }
+
+        if ($token = Auth::guard('api')->attempt($validator->validate())) {
             return response()->json([
                 'access_token' => $token,
                 'token_type' => 'Bearer',
@@ -39,9 +52,27 @@ class AuthController extends Controller
         ], 200);
     }
 
-    public function me()
+    public function signup(Request $request)
     {
-        return response()->json(Auth::guard('api')->user());
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|min:5',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|confirmed'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()->all()
+            ], 401);
+        }
+        $data = $validator->validate();
+        $user = User::create(array_merge($data, [
+            'password' => Hash::make($data['password'])
+        ]));
+
+        return response()->json([
+            'message' => 'You have successfully been registered. Please log in',
+            'credentials' => $user
+        ], 200);
     }
 
     public function logout()
