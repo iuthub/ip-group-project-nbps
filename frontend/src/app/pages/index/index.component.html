@@ -1,3 +1,27 @@
-<div class="container">
-  <h1>Hello</h1>
-</div>
+<section class="slider">
+  <div class="container">
+    <swiper [index]="1">
+      <div class="slider__item">
+        <img src="/assets/images/plov.jpg" alt="">
+      </div>
+      <div class="slider__item">
+        <img src="/assets/images/plov.jpg" alt="">
+      </div>
+      <div class="slider__item">
+        <img src="/assets/images/plov.jpg" alt="">
+      </div>
+    </swiper>
+  </div>
+</section>
+<section class="featured">
+  <div class="container">
+    <h3>
+      Today's pick
+    </h3>
+    <div class="row">
+      <div class="col-lg-4 col-md-6" *ngFor="let item of items">
+        <app-item-card [data]="item"></app-item-card>
+      </div>
+    </div>
+  </div>
+</section>

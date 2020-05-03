@@ -1,0 +1,49 @@
+@import "../../../../styles/utils.scss";
+
+footer {
+  padding: 72px 0;
+  background: #333;
+
+  @mixin md {
+    display: none;
+  }
+}
+
+.footer-section {
+  margin-bottom: 3rem;
+  font-weight: 700;
+
+  &__logo {
+    img {
+      height: 2em;
+      width: auto;
+    }
+  }
+
+  h6 {
+    margin-top: 0.325em;
+    font-family: "Open Sans";
+    color: #7E7E7E;
+    text-transform: uppercase;
+  }
+
+  ul {
+    padding-top: 24px;
+
+    li {
+      color: #ECECEC;
+      margin-bottom: 6px;
+    }
+  }
+  a {
+    transition: 300ms ease;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  @include md {
+    ul {
+      padding-top: 16px;
+    }
+  }
+}
