@@ -1,3 +1,4 @@
+@import "./styles/_mixins.scss";
 /* You can add global styles to this file, and also import other style files */
 :root {
   //colors
@@ -47,6 +48,7 @@ h5,
 h6 {
   font-family: "Titillium Web";
   font-weight: 700;
+  margin-bottom: 0;
 }
 
 
@@ -57,7 +59,10 @@ h3 {
 h5 {
   font-family: "Open Sans";
   font-size: var(--text-2xl);
-
+  font-weight: 800;
+}
+h6 {
+  font-size: var(--text-xl);
 }
 
 .container {
@@ -82,6 +87,7 @@ section {
   padding: 50px 0;
   h3 {
     text-transform: uppercase;
+    margin-bottom: 1em;
   }
 }
 
@@ -89,29 +95,41 @@ section {
 
 //btns
 .btn {
+  padding-left: 2rem;
+  padding-right: 2rem;
   &.btn- {
+    
     &default {
       border-radius: 20px;
       border: 1px solid rgba($color: #000000, $alpha: 0.7);
-      padding-left: 2rem;
-      padding-right: 2rem;
 
       &:hover {
-        background: var(--yellow);
+        background-color: var(--yellow);
         border-color: transparent;
       }
     }
 
     &action {
-      background: var(--yellow);
+      background-color: var(--yellow);
       box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.1);
       border-radius: 4px;
-      padding-left: 2rem;
-      padding-right: 2rem;
+     
 
       &:hover {
         opacity: 0.8;
         box-shadow: 0px 2px 14px rgba(0, 0, 0, 0.1);
+      }
+    }
+    
+    &alternative {
+      border: 1px solid var(--red);
+      background: none;
+      color: var(--red);
+      padding-left: 1.5em;
+      padding-right: 1.5em;
+      &:hover {
+        background-color: var(--red);
+        color: #fff;
       }
     }
   }
@@ -143,5 +161,12 @@ section {
         opacity: 1;
       }
     }
+  }
+}
+
+
+@include md {
+  body {
+    padding-top: 130px;
   }
 }

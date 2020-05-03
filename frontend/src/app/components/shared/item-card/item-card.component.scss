@@ -1,0 +1,34 @@
+.item-card {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 60px;
+  &__image {
+    height: 300px;
+    border-radius: 15px;
+    overflow: hidden;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  &__title {
+    font-family: "Open Sans";
+    color: rgba(0, 0, 0, 0.8);
+    margin: 6px 0;
+  }
+  &__description {
+    color: rgba(0, 0, 0, 0.7);
+  }
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__price {
+    font-weight: 600;
+  }
+  &__cart {
+    font-size: var(--text-sm);
+  }
+}
