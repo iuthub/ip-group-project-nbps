@@ -10,6 +10,16 @@ import { MenuComponent } from './pages/menu/menu.component';
 import { ContactsComponent } from './pages/contacts/contacts.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+//Swiper
+import { SwiperModule } from 'ngx-swiper-wrapper';
+import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+
+const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
+  direction: 'horizontal',
+  slidesPerView: 1,
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,9 +31,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule, 
-    SharedModule, BrowserAnimationsModule,
+    SharedModule, 
+    BrowserAnimationsModule,
+    SwiperModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: SWIPER_CONFIG,
+      useValue: DEFAULT_SWIPER_CONFIG
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
