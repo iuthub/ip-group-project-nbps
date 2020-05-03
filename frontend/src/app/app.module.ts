@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SharedModule } from './shared/shared.module';
+import { SharedModule } from './components/shared/shared.module';
 import { IndexComponent } from './pages/index/index.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { MenuComponent } from './pages/menu/menu.component';
