@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserLoginFormRequest;
+use App\Http\Requests\UserSignupFormRequest;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -17,30 +20,19 @@ class AuthController extends Controller
         $this->middleware('auth:api', ['except' => ['login', 'signup']]);
     }
 
-    public function login(Request $request)
+    public function login(UserLoginFormRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'errors' => $validator->errors()->all()
-            ]);
-        }
-
-        if ($token = Auth::guard('api')->attempt($validator->validate())) {
+        if ($token = Auth::guard('api')->attempt($request->validated())) {
             return response()->json([
                 'access_token' => $token,
-                'token_type' => 'Bearer',
+                'token_type' => 'Bearer',   
                 'expires_in' => Auth::guard('api')->factory()->getTTL() * 60
             ], 200);
         }
 
         return response()->json([
-            'error' => 'Unauthorized',
-        ], 401);
+            'message' => 'Incorrect credentials',
+        ], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     public function refresh()
@@ -52,19 +44,9 @@ class AuthController extends Controller
         ], 200);
     }
 
-    public function signup(Request $request)
+    public function signup(UserSignupFormRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|min:5',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed'
-        ]);
-        if ($validator->fails()) {
-            return response()->json([
-                'errors' => $validator->errors()->all()
-            ], 401);
-        }
-        $data = $validator->validate();
+        $data = $request->validated();
         $user = User::create(array_merge($data, [
             'password' => Hash::make($data['password'])
         ]));
@@ -72,7 +54,7 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'You have successfully been registered. Please log in',
             'credentials' => $user
-        ], 200);
+        ], Response::HTTP_OK);
     }
 
     public function logout()

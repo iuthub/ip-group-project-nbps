@@ -18,13 +18,23 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 Route::group([
-    // 'middleware' => 'api',
     'namespace' => 'Api',
 ], function () {
-    Route::post('login', 'AuthController@login');
-    Route::post('logout', 'AuthController@logout');
-    Route::post('signup', 'AuthController@signup');
-    Route::post('refresh', 'AuthController@refresh');
+    Route::post('login', 'AuthController@login')->name('api.login');
+    Route::post('logout', 'AuthController@logout')->name('api.logout');
+    Route::post('signup', 'AuthController@signup')->name('api.signup');
+    Route::post('refresh', 'AuthController@refresh')->name('api.refresh');
+    Route::middleware('auth:api')->group(function () {
+        Route::patch('account', 'AccountController@update')->name('api.account.update');
+        Route::get('account', 'AccountController@show');
+    });
+});
+/**
+ * Fallback function if the route has not been found
+ */
+Route::fallback(function (Request $request) {
+    return response()->json([
+        'message' => 'Not found'
+    ], 404);
 });
