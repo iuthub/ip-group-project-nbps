@@ -25,8 +25,8 @@ class User extends Authenticatable implements JWTSubject
     public static function boot()
     {
         parent::boot();
-        static::saved(function (User $user) {
-            if ($user->exists) {
+        static::created(function (User $user) {
+            if (!$user->profile) {
                 $user->profile()->create();
             }
         });
