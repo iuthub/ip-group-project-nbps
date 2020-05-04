@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Booking extends Elegant
+class Booking extends Model
 {
 
     protected $fillable = [
@@ -13,16 +13,6 @@ class Booking extends Elegant
         'book_time',
         'people_count',
     ];
-
-    public function rules()
-    {
-        return [
-            'table_id' => 'required|numeric',
-            'book_date' => 'required|date',
-            'book_time' => 'required|time',
-            'people_count' => 'required|numeric'
-        ];
-    }
 
     public function user()
     {

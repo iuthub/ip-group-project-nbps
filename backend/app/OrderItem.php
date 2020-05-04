@@ -5,21 +5,12 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class OrderItem extends Elegant
+class OrderItem extends Model
 {
     protected $fillable = [
         'item_id',
         'quantity'
     ];
-
-
-    public static function rules()
-    {
-        return [
-            'item_id' => 'required',
-            'quantity' => 'required|integer',
-        ];
-    }
 
     public static function boot()
     {

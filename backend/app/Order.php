@@ -4,18 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Elegant
+class Order extends Model
 {
     protected $fillable = [
         'payment_type',
     ];
 
-    public function rules()
-    {
-        return [
-            'payment_type' => 'required|in:card,cash'
-        ];
-    }
 
     public function user()
     {
