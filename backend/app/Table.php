@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Table extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'number',
+        'people_count',
+        'min_deposit'
+    ];
 
     public function bookings()
     {

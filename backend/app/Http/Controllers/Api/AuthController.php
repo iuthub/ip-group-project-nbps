@@ -15,17 +15,12 @@ use Illuminate\Support\Facades\Validator;
 class AuthController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('auth:api', ['except' => ['login', 'signup']]);
-    }
-
     public function login(UserLoginFormRequest $request)
     {
         if ($token = Auth::guard('api')->attempt($request->validated())) {
             return response()->json([
                 'access_token' => $token,
-                'token_type' => 'Bearer',   
+                'token_type' => 'Bearer',
                 'expires_in' => Auth::guard('api')->factory()->getTTL() * 60
             ], 200);
         }
@@ -46,10 +41,14 @@ class AuthController extends Controller
 
     public function signup(UserSignupFormRequest $request)
     {
-        $data = $request->validated();
-        $user = User::create(array_merge($data, [
-            'password' => Hash::make($data['password'])
-        ]));
+        $user = User::create(
+            array_merge($request->only(['email', 'name', 'password']), [
+                'password' => Hash::make($request->get('password'))
+            ])
+        );
+        $user->profile()->create(
+            $request->except(['name', 'email', 'password'])
+        );
 
         return response()->json([
             'message' => 'You have successfully been registered. Please log in',

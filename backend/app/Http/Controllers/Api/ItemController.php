@@ -8,58 +8,24 @@ use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function all()
     {
-        //
+        return response()->json([
+            'items' => Item::all()
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function category(Item $item)
     {
-        //
+        return response()->json([
+            $item->category
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Item  $item
-     * @return \Illuminate\Http\Response
-     */
     public function show(Item $item)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Item  $item
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Item $item)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Item  $item
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Item $item)
-    {
-        //
+        return response()->json([
+            $item
+        ]);
     }
 }

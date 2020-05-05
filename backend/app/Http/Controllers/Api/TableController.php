@@ -2,64 +2,25 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Booking;
 use App\Http\Controllers\Controller;
 use App\Table;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class TableController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function all()
     {
-        //
+        return response()->json([
+            'tables' => Table::all()
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function details(Table $table)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Table  $table
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Table $table)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Table  $table
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Table $table)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Table  $table
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Table $table)
-    {
-        //
+        return response()->json([
+            'bookings' => $table->bookings
+        ], Response::HTTP_OK);
     }
 }

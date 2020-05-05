@@ -47,5 +47,7 @@ class AccountUpdateFormRequest extends FormRequest
                 'errors' => $validator->errors()->all()
             ], 422));
         }
+
+        parent::failedValidation($validator);
     }
 }

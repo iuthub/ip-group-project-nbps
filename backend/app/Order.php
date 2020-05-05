@@ -3,13 +3,24 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 
 class Order extends Model
 {
+    public const STATUS_WAITING = 0;
+    public const STATUS_CLOSED = 1;
+
     protected $fillable = [
         'payment_type',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            $model->total = 0;
+        });
+    }
 
     public function user()
     {
@@ -31,5 +42,15 @@ class Order extends Model
     public function orderItems()
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function waiting(Builder $query)
+    {
+        return $query->where('status', self::STATUS_WAITING);
+    }
+
+    public function closed(Builder $query)
+    {
+        return $query->where('status', self::STATUS_WAITING);
     }
 }

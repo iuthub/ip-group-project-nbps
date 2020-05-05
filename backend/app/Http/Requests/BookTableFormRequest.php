@@ -2,15 +2,14 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UserSignupFormRequest extends FormRequest
+class BookTableFormRequest extends FormRequest
 {
-
-    protected $redirectRoute = 'register';
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -18,7 +17,7 @@ class UserSignupFormRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Auth::guard('api')->user();
     }
 
     /**
@@ -29,20 +28,18 @@ class UserSignupFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:5',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6|confirmed',
-            'firstname' => 'alpha|min:5',
-            'lastname' => 'alpha|min:5'
+            'book_date' => 'required|date_format:Y-m-d',
+            'book_time' => 'required|date_format:H:i',
+            'people_count' => 'required|numeric'
         ];
     }
 
-    protected function failedValidation(Validator $validator)
+    protected function failedAuthorization(Validator $validator)
     {
         if ($this->wantsJson()) {
             throw new HttpResponseException(response()->json([
                 'errors' => $validator->errors()->all()
-            ], 422));
+            ], Response::HTTP_UNPROCESSABLE_ENTITY));
         }
 
         parent::failedValidation($validator);

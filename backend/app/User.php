@@ -22,20 +22,9 @@ class User extends Authenticatable implements JWTSubject
         'name', 'email', 'password',
     ];
 
-    public static function boot()
-    {
-        parent::boot();
-        static::created(function (User $user) {
-            if (!$user->profile) {
-                $user->profile()->create();
-            }
-        });
-        static::deleted(function (User $user) {
-            if (!is_null($user->profile)) {
-                $user->profile->delete();
-            }
-        });
-    }
+    protected $appends = [
+        'profile',
+    ];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -43,7 +32,8 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     /**
@@ -78,5 +68,10 @@ class User extends Authenticatable implements JWTSubject
     public function profile()
     {
         return $this->hasOne(Profile::class);
+    }
+
+    public function getProfileAttribute()
+    {
+        return $this->profile()->get();
     }
 }
