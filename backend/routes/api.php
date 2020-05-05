@@ -30,7 +30,7 @@ Route::group([
      * Category routes
      */
     Route::get('categories', 'CategoryController@all');
-    Route::post('category/{category}/items', 'CategoryController@items');
+    Route::get('category/{category}/items', 'CategoryController@items');
     Route::get('category/{categoty}', 'CategoryController@show');
 
     /**
@@ -68,11 +68,11 @@ Route::group([
         /**
          * Table routes
          */
-        Route::get('bookings/{table}', 'TableController@details')->where(['table' => '\d+']);
+        Route::get('table/{table}/details', 'TableController@details')->where(['table' => '\d+']);
         /**
          * Booking routes
          */
-        Route::post('table/{table}/book', 'BookingController@book');
+        Route::post('book/table/{table}', 'BookingController@book');
         Route::get('bookings', 'BookingController@all');
     });
     /**
