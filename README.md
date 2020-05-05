@@ -85,7 +85,7 @@ php artisan serve
 | _yes_       | PATCH  | `http://{domain}/api/account`                   | **name, email, password, firstname, lastname, phone, country, city, postcode, address** | Update account details                  |
 | _yes_       | GET    | `http://{domain}/api/orders`                    |                                                                                         | Show orders of an authenticated user    |
 | _yes_       | GET    | `http://{domain}/api/order/{order}`             |                                                                                         | Show order details                      |
-| _yes_       | POST   | `http://{domain}/api/order`                     | **payment_type (card, cash), items (array)**                                            | Place an order                          |
+| _yes_       | POST   | `http://{domain}/api/order`                     | **payment_type (enum: cash, card), items (array)**                                      | Place an order                          |
 | _yes_       | GET    | `http://{domain}/api/bookings`                  |                                                                                         | Lost all bookings by authenticated user |
 | _yes_       | POST   | `http://{domain}/api/book/table/{table}`        |                                                                                         | Book a table by ID                      |
 
@@ -93,4 +93,19 @@ php artisan serve
 
 ```
 Authorization: Bearer <token>
+```
+
+### Sample for placing an order request
+
+```json
+{
+    "payment_type": "card",
+    "items":[
+        {
+            "id": <item_id>,
+            "quantity": <quantity>
+        },
+        ...
+    ]
+}
 ```
