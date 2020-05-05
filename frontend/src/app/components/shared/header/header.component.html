@@ -1,0 +1,64 @@
+<nav class="nav" #nav>
+  <div class="nav__top" #navTop>
+    <div class="container">
+      <div class="nav__section">
+        <a [routerLink]="['/']" class="nav__brand">
+          <img src="/assets/images/iPlove_wide.svg" alt="">
+        </a>
+      </div>
+      <div class="nav__section d-none d-md-block">
+        <a href="tel:+998712008080" class="nav__number hover-link">
+          (71) 200 - 80 - 80
+        </a>
+      </div>
+      <div class="nav__section">
+        <a [routerLink]="['/auth']" class="btn btn-default d-none d-md-inline-block">
+          Sign in
+        </a>
+        <div 
+          (click)="onHamburgerClick($event)" 
+          class="hamburger hamburger--elastic d-inline-block d-md-none">
+          <div class="hamburger-box">
+            <div class="hamburger-inner"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="nav__bottom">
+    <div class="container">
+      <ul class="nav__categories">
+        <li>
+          <a href="/category/plov" class="hover-link">
+            Plov
+          </a>
+        </li>
+        <li>
+          <a href="/category/salads" class="hover-link">
+            salads
+          </a>
+        </li>
+        <li>
+          <a href="/category/drinks" class="hover-link">
+            drinks
+          </a>
+        </li>
+        <li>
+          <a href="/category/sets" class="hover-link">
+            sets
+          </a>
+        </li>
+      </ul>
+      <div class="d-flex align-items-center justify-content-between">
+        <a href="/cart" class="btn btn-action">
+          Cart <b>(1)</b>
+        </a>
+        <a [routerLink]="['/auth']" class="btn btn-default d-inline-block d-md-none">
+          Sign in
+        </a>
+      </div>
+
+    </div>
+  </div>
+</nav>
