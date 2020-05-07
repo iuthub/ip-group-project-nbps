@@ -14,6 +14,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { TablesComponent } from './pages/tables/tables.component';
+
+// Modal
+import { ModalModule } from 'ngx-bootstrap/modal';
+
+// DatePicker
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   slidesPerView: 1,
@@ -28,6 +35,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     ErrorComponent,
     MenuComponent,
     ContactsComponent,
+    TablesComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +43,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     SharedModule, 
     BrowserAnimationsModule,
     SwiperModule,
+    ModalModule.forRoot(),
+    BsDatepickerModule.forRoot(),
   ],
   providers: [
     {
