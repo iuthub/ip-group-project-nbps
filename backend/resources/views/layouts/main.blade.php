@@ -24,7 +24,7 @@
 </head>
 <body>
     <div>
-        @include('templates.navbar')
+        @include('inc.navbar')
     </div>
 
     <div class="container mt-3 mb-3">
