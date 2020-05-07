@@ -11,6 +11,9 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements JWTSubject
 {
+
+    public const ROLE_ADMINISTRATOR = 'administrator';
+
     use Notifiable, HasRoles;
 
     /**
@@ -73,5 +76,10 @@ class User extends Authenticatable implements JWTSubject
     public function getProfileAttribute()
     {
         return $this->profile()->get();
+    }
+
+    public function isAdmin()
+    {
+        return $this->hasRole(self::ROLE_ADMINISTRATOR);
     }
 }
