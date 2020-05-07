@@ -22,6 +22,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 
 // DatePicker
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   slidesPerView: 1,
@@ -47,6 +48,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     SwiperModule,
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    FontAwesomeModule,
   ],
   providers: [
     {
