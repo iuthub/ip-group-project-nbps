@@ -1,4 +1,5 @@
 @import "./styles/_mixins.scss";
+
 /* You can add global styles to this file, and also import other style files */
 :root {
   //colors
@@ -61,12 +62,17 @@ h5 {
   font-size: var(--text-2xl);
   font-weight: 800;
 }
+
 h6 {
   font-size: var(--text-xl);
 }
 
 .container {
   max-width: 1280px;
+
+  & &--narrow {
+    max-width: 1124px;
+  }
 }
 
 img {
@@ -85,6 +91,7 @@ a.hover-link {
 
 section {
   padding: 50px 0;
+
   h3 {
     text-transform: uppercase;
     margin-bottom: 1em;
@@ -97,8 +104,9 @@ section {
 .btn {
   padding-left: 2rem;
   padding-right: 2rem;
+
   &.btn- {
-    
+
     &default {
       border-radius: 20px;
       border: 1px solid rgba($color: #000000, $alpha: 0.7);
@@ -113,20 +121,21 @@ section {
       background-color: var(--yellow);
       box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.1);
       border-radius: 4px;
-     
+
 
       &:hover {
         opacity: 0.8;
         box-shadow: 0px 2px 14px rgba(0, 0, 0, 0.1);
       }
     }
-    
+
     &alternative {
       border: 1px solid var(--red);
       background: none;
       color: var(--red);
       padding-left: 1.5em;
       padding-right: 1.5em;
+
       &:hover {
         background-color: var(--red);
         color: #fff;
@@ -135,19 +144,63 @@ section {
   }
 }
 
+.secondary-page {
+  position: relative;
+  padding-top: 175px;
+
+  &__header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 350px;
+    width: 100%;
+    z-index: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__content {
+    padding: 0 56px;
+    padding-bottom: 120px;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+    background: #fff;
+    box-shadow: 0px 4px 4px rgba(75, 63, 63, 0.25);
+    border-radius: 10px;
+    margin-bottom: 100px;
+  }
+
+  &__title {
+    text-align: center;
+    padding: 48px 0;
+    text-transform: uppercase;
+  }
+
+  p {
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.7);
+  }
+
+}
+
 
 
 .slider {
   overflow: hidden;
   padding-top: 0;
-  
+
   .swiper-container {
     overflow: visible !important;
   }
 
   &__item {
     border-radius: 10px;
-    
+
     img {
       height: 350px;
       width: 100%;
@@ -164,9 +217,35 @@ section {
   }
 }
 
+@include lg {
+
+  .secondary-page {
+    &__content {
+      padding: 0 32px;
+      padding-bottom: 100px;
+    }
+  }
+}
 
 @include md {
   body {
     padding-top: 130px;
+  }
+  .secondary-page {
+    p {
+      font-size: 1rem;
+    }
+  }
+  //TODO
+  // .container {
+  //   & &--narrow {
+  //     margin: 0 -15px;
+  //   }
+  // }
+}
+
+@include sm {
+  body {
+    padding-top: 96px;
   }
 }

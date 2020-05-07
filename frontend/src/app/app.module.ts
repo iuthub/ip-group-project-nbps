@@ -8,6 +8,7 @@ import { IndexComponent } from './pages/index/index.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { MenuComponent } from './pages/menu/menu.component';
 import { ContactsComponent } from './pages/contacts/contacts.component';
+import { AboutComponent } from './pages/about/about.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //Swiper
@@ -36,6 +37,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MenuComponent,
     ContactsComponent,
     TablesComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
