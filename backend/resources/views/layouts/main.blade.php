@@ -15,7 +15,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    
+
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -23,14 +23,12 @@
 
 </head>
 <body>
-    <div>
-        @include('inc.navbar')
-    </div>
+    @include('layouts.templates.navbar')
 
     <div class="container mt-3 mb-3">
-        @include('inc.messages')
+        @include('layouts.templates.messages')
         @yield('content')
-    </div>     
-    
+    </div>
+
 </body>
 </html>

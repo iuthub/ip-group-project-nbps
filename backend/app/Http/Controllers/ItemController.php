@@ -15,8 +15,10 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = Item::orderBy('created_at', 'desc') -> get();
-        return view('items.index') -> with('items', $items);
+        $items = Item::orderBy('created_at', 'desc')->get();
+        return view('item.index', [
+            'items' => $items
+        ]);
     }
 
     /**
@@ -26,7 +28,10 @@ class ItemController extends Controller
      */
     public function create()
     {
-        return view('items.create')->with('categories', Category::all());
+        $categories = Category::all();
+        return view('item.create', [
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -40,10 +45,10 @@ class ItemController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
-            'price' => 'required | numeric',
-            'category_id' => 'required | numeric'
+            'price' => 'required|numeric',
+            'category_id' => 'required|numeric'
         ]);
-        
+
         $item = new Item;
         $item->title = $request->input('title');
         $item->description = $request->input('description');
@@ -52,18 +57,7 @@ class ItemController extends Controller
         $item->image = Item::getDefaultPhotoURL();
         // $item->user_id = auth()->user()->id;
         $item->save();
-        return redirect('/items')->with('success', 'Item created');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return back()->with('success', 'Item created');
     }
 
     /**
@@ -75,7 +69,7 @@ class ItemController extends Controller
     public function edit($id)
     {
         $item = Item::find($id);
-        return view('items.edit') -> with('item', $item)->with('categories', Category::all());
+        return view('item.edit')->with('item', $item)->with('categories', Category::all());
     }
 
     /**
@@ -93,19 +87,19 @@ class ItemController extends Controller
             'price' => 'required | numeric',
             'category_id' => 'required | numeric'
         ]);
-        
+
         $item = Item::find($id);
         $item->title = $request->input('title');
         $item->description = $request->input('description');
         $item->price = $request->input('price');
         $item->category_id = $request->input('category_id');
         $item->image = Item::getDefaultPhotoURL();
-        
+
 
         $item->save();
 
-    
-        return redirect('/items')->with('success', 'Item edited');
+
+        return back()->with('success', 'Item edited');
     }
 
     /**
@@ -117,7 +111,7 @@ class ItemController extends Controller
     public function destroy($id)
     {
         $item = Item::find($id);
-        $item -> delete();
-        return redirect('/items')->with('success', 'Item deleted');
+        $item->delete();
+        return back()->with('success', 'Item deleted');
     }
 }
