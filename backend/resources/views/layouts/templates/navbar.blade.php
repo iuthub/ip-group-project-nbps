@@ -16,7 +16,7 @@
                 <li class="nav-item"><a href="{{ route('item.index') }}" class="nav-link">Items</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">Orders</a></li>
                 <li class="nav-item"><a href="{{ route('table.index') }}" class="nav-link">Tables</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Bookings</a></li>
+                <li class="nav-item"><a href="{{ route('booking.index')}}" class="nav-link">Bookings</a></li>
             </ul>
             @endauth
 

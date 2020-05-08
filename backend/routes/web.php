@@ -43,4 +43,5 @@ Route::group([
             'as' => 'changeStatusItem',
             'middleware' => ['auth']
     ]);
+    Route::resource('booking', 'BookingController');
 });
