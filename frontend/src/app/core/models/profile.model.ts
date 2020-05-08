@@ -6,6 +6,9 @@ export class Profile implements Deserializable {
   lastName: string;
   address: string;
   phone: string;
+  email: string;
+  password: string;
+  password_confirmation: string;
   deserialize(input: any): this {
     Object.assign(this, input);
     

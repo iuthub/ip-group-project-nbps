@@ -12,12 +12,14 @@
         </a>
       </div>
       <div class="nav__section">
-        <a [routerLink]="['/login']" class="btn btn-default d-none d-md-inline-block">
+        <a *ngIf="isAuthenticated" [routerLink]="['/account']" class="btn btn-default d-none d-md-inline-block">
+          Account
+        </a>
+        <a *ngIf="!isAuthenticated" [routerLink]="['/login']" class="btn btn-default d-none d-md-inline-block">
           Login
         </a>
-        <div 
-          (click)="onHamburgerClick($event)" 
-          class="hamburger hamburger--elastic d-inline-block d-md-none">
+
+        <div (click)="onHamburgerClick($event)" class="hamburger hamburger--elastic d-inline-block d-md-none">
           <div class="hamburger-box">
             <div class="hamburger-inner"></div>
           </div>
@@ -59,8 +61,11 @@
         <a href="/cart" class="btn btn-action">
           Cart <b>(1)</b>
         </a>
-        <a [routerLink]="['/auth']" class="btn btn-default d-inline-block d-md-none">
-          Sign in
+        <a *ngIf="isAuthenticated" [routerLink]="['/account']" class="btn btn-default d-inline-block d-md-none">
+          Account
+        </a>
+        <a *ngIf="!isAuthenticated" [routerLink]="['/login']" class="btn btn-default d-inline-block d-md-none">
+          Login
         </a>
       </div>
 

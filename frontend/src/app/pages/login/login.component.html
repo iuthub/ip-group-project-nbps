@@ -6,19 +6,36 @@
         <h1 class="secondary-page__title">
             Login
         </h1>
-        <form>
+        <form [formGroup]="form" (submit)="onSubmit($event)" *ngIf="isFormReady">
             <div class="form-row justify-content-center">
                 <div class="form-group col-lg-4">
                     <label for="inputEmail">Email</label>
-                    <input type="email" class="form-control" id="inputEmail">
+                    <input 
+                        formControlName="email"
+                        name="email"
+                        type="email" 
+                        class="form-control" 
+                        id="inputEmail">
                 </div>
                 <div class="form-group col-lg-4">
                     <label for="inputPassword">Password</label>
-                    <input type="password" class="form-control" id="inputPassword">
+                    <input 
+                        formControlName="password"
+                        name="password"
+                        type="password" 
+                        class="form-control" 
+                        id="inputPassword">
                 </div>
             </div>
             <div class="row justify-content-center flex-column align-items-center">
-                <button type="submit" class="btn btn-action mb-3 mt-3">Login</button>
+                <button 
+                    type="submit" 
+                    class="btn btn-action mb-3 mt-3"
+                    [disabled]="isLoading || form.invalid"
+                    >
+                    <fa-icon [icon]="faCircleNotch" [spin]="true" *ngIf="isLoading"></fa-icon>
+                    Login
+                </button>
                 <a [routerLink]="['/register']" class="btn btn-link">Register</a>
             </div>
         </form>

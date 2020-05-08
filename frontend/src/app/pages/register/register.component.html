@@ -6,39 +6,86 @@
         <h1 class="secondary-page__title">
             Register
         </h1>
-        <form>
+        <form [formGroup]="form" (submit)="onSubmit($event)" *ngIf="isFormReady">
             <div class="form-row justify-content-center">
                 <div class="form-group col-lg-4">
-                    <label for="inputName">Name</label>
-                    <input type="text" class="form-control" id="inputName">
+                    <label for="inputName">Username</label>
+                    <input 
+                        
+                        formControlName="name"
+                        name="name"
+                        type="text" 
+                        class="form-control" 
+                        id="inputName">
                 </div>
                 <div class="form-group col-lg-4">
                     <label for="inputEmail">Email</label>
-                    <input type="email" class="form-control" id="inputEmail">
+                    <input 
+                        
+                        formControlName="email"
+                        name="email"
+                        type="email" 
+                        class="form-control" 
+                        id="inputEmail"
+                        >
                 </div>
             </div>
             <div class="form-row justify-content-center">
                 <div class="form-group col-lg-4">
                     <label for="inputPassword">Password</label>
-                    <input type="password" class="form-control" id="inputPassword">
+                    <input 
+                        
+                        formControlName="password"
+                        name="password"
+                        type="password" 
+                        class="form-control" 
+                        id="inputPassword"
+                        >
                 </div>
                 <div class="form-group col-lg-4">
                     <label for="inputConfirmPassword">Confirm password</label>
-                    <input type="password" class="form-control" id="inputConfirmPassword">
+                    <input 
+                        
+                        formControlName="password_confirmation"
+                        name="password_confirmation"
+                        type="password" 
+                        class="form-control" 
+                        id="inputConfirmPassword">
                 </div>
             </div>
             <div class="form-row justify-content-center">
                 <div class="form-group col-lg-4">
-                    <label for="inputFristName">First name</label>
-                    <input type="text" class="form-control" id="inputFristName">
+                    <label for="inputFirstName">First name</label>
+                    <input 
+                        
+                        formControlName="firstName"
+                        name="firstName"
+                        type="text" 
+                        class="form-control" 
+                        id="inputFirstName">
                 </div>
                 <div class="form-group col-lg-4">
                     <label for="inputLastName">Last name</label>
-                    <input type="text" class="form-control" id="inputLastName">
+                    <input 
+                        
+                        formControlName="lastName"
+                        name="lastName"
+                        type="text" 
+                        class="form-control" 
+                        id="inputLastName">
                 </div>
             </div>
             <div class="row justify-content-center flex-column align-items-center">
-                <button type="submit" class="btn btn-action mb-3 mt-3">Register</button>
+                <button
+                    [disabled]="isLoading"
+                    type="submit" 
+                    class="btn btn-action mb-3 mt-3">
+                    <fa-icon [icon]="faCircleNotch" [spin]="true" *ngIf="isLoading"></fa-icon>
+                    Register
+                </button>
+            </div>
+            <div class="error text-center" *ngIf="this.hasErrors">
+                Invalid fields. Minimum length is 5.
             </div>
         </form>
     </div>

@@ -1,5 +1,8 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { DOMService } from 'src/app/core/services/dom.service';
+import { UserService } from 'src/app/core/services/user.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -7,13 +10,17 @@ import { DOMService } from 'src/app/core/services/dom.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
+  //Subject needed for unsubscribing of observables in the ngOnDestroy hook
+  private destroy = new Subject<void>();
   @ViewChild("nav", { static: false}) nav: ElementRef<HTMLElement>;
   @ViewChild("navTop", { static: false}) navTop: ElementRef<HTMLElement>;
   
   
   isNavOpen = false;
+  isAuthenticated = false;
   constructor(
-    private domService: DOMService, 
+    private domService: DOMService,
+    private userService: UserService 
   ) { 
     
     // To prevent loss of context in event Listener
@@ -21,6 +28,11 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.isAuthenticated = this.userService.isAuthenticated();
+    
+    this.userService.authChange.pipe(takeUntil(this.destroy)).subscribe(()=>{
+      this.isAuthenticated = this.userService.isAuthenticated();
+    })
   }
   
   ngAfterViewInit(): void {
@@ -46,5 +58,10 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     window.removeEventListener("scroll", this.onScroll);
+    this.destroy.next();
+    this.destroy.complete();
   }
+  
+  
+  
 }
