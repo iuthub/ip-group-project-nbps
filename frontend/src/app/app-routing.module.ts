@@ -6,6 +6,8 @@ import { MenuComponent } from './pages/menu/menu.component';
 import { ContactsComponent } from './pages/contacts/contacts.component';
 import { TablesComponent } from './pages/tables/tables.component';
 import { AboutComponent } from './pages/about/about.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 
 const routes: Routes = [
@@ -14,6 +16,8 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'contacts', component: ContactsComponent },
   { path: 'tables', component: TablesComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: '**', component: ErrorComponent },  // Wildcard route for a 404 page
 ];
 

@@ -22,6 +22,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 
 // DatePicker
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   slidesPerView: 1,
@@ -38,6 +40,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     ContactsComponent,
     TablesComponent,
     AboutComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
