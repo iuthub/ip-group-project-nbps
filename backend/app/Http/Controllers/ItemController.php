@@ -15,9 +15,8 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = Item::orderBy('created_at', 'desc')->get();
         return view('item.index', [
-            'items' => $items
+            'items' => Item::orderBy('created_at', 'desc')->get()
         ]);
     }
 
@@ -99,7 +98,9 @@ class ItemController extends Controller
         $item->save();
 
 
-        return back()->with('success', 'Item edited');
+                return view('item.index', [
+                    'items' => Item::all()
+                ])->with('success', 'Item edited');
     }
 
     /**
@@ -114,4 +115,17 @@ class ItemController extends Controller
         $item->delete();
         return back()->with('success', 'Item deleted');
     }
+
+    public function changeStatusItem($id){
+         $item = Item::find($id);
+
+         $item->status = !$item->status;
+         $item->save();
+
+         return view('item.index', [
+            'items' => Item::orderBy('created_at', 'desc')->get()
+         ]);
+    }
+
+
 }

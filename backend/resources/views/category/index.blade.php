@@ -9,8 +9,8 @@
     @endif
 
     <div class="d-flex justify-content-between">
-        <h3>Items</h3>
-        <a href="{{ route('item.create') }}" class="btn btn-primary">Create item</a>
+        <h3>Categories</h3>
+        <a href="{{ route('category.create') }}" class="btn btn-primary">Create item</a>
     </div>
 
     <div class="row mt-3">
@@ -18,33 +18,28 @@
             <table class="table table-stripped">
                 <tr>
                     <th>Title</th>
-                    <th>Category</th>
                     <th>Description</th>
-                    <th>Price</th>
                     <th>Status</th>
-                    <th>Image</th>
                     <th colspan="3">Actions</th>
                 </tr>
-                @if(count($items) > 0)
-                @foreach ($items as $item)
+                @if(count($categories) > 0)
+                @foreach ($categories as $category)
                 <tr>
-                    <td>{{ $item->title }}</td>
-                    <td>{{ $item->category->title }}</td>
-                    <td>{{ $item->description }}</td>
-                    <td>{{ $item->price }}</td>
+                    <td>{{ $category->title }}</td>
+                    <td>{{ $category->description }}</td>
                     <td>
-                     <a href="{{ route('changeStatusItem', $item->id) }}" class="btn btn-secondary">
-                        @if($item->status)
+                     <a href="{{ route('changeStatusCategory', $category->id) }}" class="btn btn-secondary">
+                        @if($category->status)
                             Active
                         @else
                             Inactive
                          @endif
                       </a>
+
                     </td>
-                    <td>{{ $item->image }}</td>
-                    <td><a href="{{ route('item.edit', $item->id) }}" class="btn btn-secondary">Edit</a></td>
+                    <td><a href="{{ route('category.edit', $category->id) }}" class="btn btn-secondary">Edit</a></td>
                     <td>
-                        <form method="post" action="{{ route('item.destroy', $item->id) }}">
+                        <form method="post" action="{{ route('category.destroy', $category->id) }}">
                             @csrf
                             @method('delete')
                             <button type="submit" class="btn btn-danger">Delete</button>
