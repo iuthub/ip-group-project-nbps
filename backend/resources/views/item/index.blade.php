@@ -2,12 +2,6 @@
 
 @section('content')
 <div class="card-body">
-    @if (session('status'))
-    <div class="alert alert-success" role="alert">
-        {{ session('status') }}
-    </div>
-    @endif
-
     <div class="d-flex justify-content-between">
         <h3>Items</h3>
         <a href="{{ route('item.create') }}" class="btn btn-primary">Create item</a>

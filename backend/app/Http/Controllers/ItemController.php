@@ -56,7 +56,7 @@ class ItemController extends Controller
         $item->image = Item::getDefaultPhotoURL();
         // $item->user_id = auth()->user()->id;
         $item->save();
-        return back()->with('success', 'Item created');
+        return redirect('/item')->with('success', 'Item created');
     }
 
     /**
@@ -93,14 +93,8 @@ class ItemController extends Controller
         $item->price = $request->input('price');
         $item->category_id = $request->input('category_id');
         $item->image = Item::getDefaultPhotoURL();
-
-
         $item->save();
-
-
-                return view('item.index', [
-                    'items' => Item::all()
-                ])->with('success', 'Item edited');
+        return redirect('/item')->with('success', 'Item edited');
     }
 
     /**

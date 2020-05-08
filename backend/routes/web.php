@@ -44,4 +44,6 @@ Route::group([
             'middleware' => ['auth']
     ]);
     Route::resource('booking', 'BookingController');
+    Route::resource('order', 'OrderController')->except(['create', 'store', 'edit', 'update']);
+    Route::resource('orderItem', 'OrderItemController')->except(['index', 'show', 'create', 'store', 'edit', 'update']);
 });
