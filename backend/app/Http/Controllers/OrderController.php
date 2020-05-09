@@ -29,10 +29,9 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Order $order)
     {
-        $order = Order::find($id)->user->name;
-        $orderItems = OrderItem::where('order_id', $id)->get();
+        $orderItems = $order->orderItems;
         return view('order.show', [
             'orderItems' => $orderItems,
             'order' => $order,

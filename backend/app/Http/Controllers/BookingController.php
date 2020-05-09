@@ -46,18 +46,18 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'people_count' => 'required|numeric'
+            'user_id' => 'required|numeric',
+            'people_count' => 'required|numeric',
+            'table_id' => 'required|numeric',
+            'book_date' => 'date_format:Y-m-d',
+            'book_time' => 'date_format:H:i'
         ]);
 
-        $booking = new Booking;
-        $booking->user_id = $request->input('user_id');
-        $booking->table_id = $request->input('table_id');
-        $booking->book_date = $request->input('book_date');
-        $booking->book_time = $request->input('book_time');
-        $booking->people_count = $request->input('people_count');
-        // $booking->user_id = auth()->user()->id;
+        $booking = new Booking($request->all());
         $booking->save();
-        return redirect()->route('booking.index')->with('success', 'Booking created');
+        return redirect()->route('booking.index')->with([
+            'success' => __('flash.success.store', ['model' => 'Booking'])
+        ]);
     }
 
     /**
@@ -69,10 +69,13 @@ class BookingController extends Controller
     public function edit($id)
     {
         $booking = Booking::find($id);
-        return view('booking.edit')
-                ->with('booking', $booking)
-                ->with('users', User::all())
-                ->with('tables', Table::all());
+        $users = User::all();
+        $tables = Table::all();
+        return view('booking.edit', [
+            'booking' => $booking,
+            'users' => $users,
+            'tables' => $tables
+        ]);
     }
 
     /**
@@ -82,24 +85,20 @@ class BookingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Booking $booking)
     {
         $this->validate($request, [
-            'people_count' => 'required|numeric'
+            'user_id' => 'required|numeric',
+            'people_count' => 'required|numeric',
+            'table_id' => 'required|numeric',
+            'book_date' => 'date_format:Y-m-d',
+            'book_time' => 'date_format:H:i'
         ]);
 
-        $booking = Booking::find($id);
-        $booking->user_id = $request->input('user_id');
-        $booking->table_id = $request->input('table_id');
-        $booking->book_date = $request->input('book_date');
-        $booking->book_time = $request->input('book_time');
-        $booking->people_count = $request->input('people_count');
-
-
-        $booking->save();
-
-
-        return redirect()->route('booking.index')->with('success', 'Booking edited');
+        $booking->update($request->all());
+        return redirect()->route('booking.index')->with([
+            'success' => __('flash.success.update', ['model' => 'Booking'])
+        ]);
     }
 
     /**
@@ -108,10 +107,11 @@ class BookingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Booking $booking)
     {
-        $booking = Booking::find($id);
         $booking->delete();
-        return redirect()->route('booking.index')->with('success', 'Booking deleted');
+        return redirect()->route('booking.index')->with([
+            'success' => __('flash.success.destroy', ['model' => 'Booking'])
+        ]);
     }
 }

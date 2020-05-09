@@ -15,8 +15,9 @@ class ItemController extends Controller
      */
     public function index()
     {
+        $items = Item::orderBy('created_at', 'desc')->get();
         return view('item.index', [
-            'items' => Item::orderBy('created_at', 'desc')->get()
+            'items' => $items
         ]);
     }
 
@@ -48,15 +49,12 @@ class ItemController extends Controller
             'category_id' => 'required|numeric'
         ]);
 
-        $item = new Item;
-        $item->title = $request->input('title');
-        $item->description = $request->input('description');
-        $item->price = $request->input('price');
-        $item->category_id = $request->input('category_id');
-        $item->image = Item::getDefaultPhotoURL();
-        // $item->user_id = auth()->user()->id;
-        $item->save();
-        return redirect('/item')->with('success', 'Item created');
+        $item = Item::create(array_merge($request->all(), [
+            'image' => Item::getDefaultPhotoURL()
+        ]));
+        return redirect()->rotue('item.index')->with([
+            'success' => __('flash.success.store', ['model' => 'Item'])
+        ]);
     }
 
     /**
@@ -65,10 +63,13 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Item $item)
     {
-        $item = Item::find($id);
-        return view('item.edit')->with('item', $item)->with('categories', Category::all());
+        $categories = Category::all();
+        return view('item.edit', [
+            'item' => $item,
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -78,23 +79,20 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Item $item)
     {
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
-            'price' => 'required | numeric',
-            'category_id' => 'required | numeric'
+            'price' => 'required|numeric',
+            'category_id' => 'required|numeric',
         ]);
-
-        $item = Item::find($id);
-        $item->title = $request->input('title');
-        $item->description = $request->input('description');
-        $item->price = $request->input('price');
-        $item->category_id = $request->input('category_id');
-        $item->image = Item::getDefaultPhotoURL();
-        $item->save();
-        return redirect('/item')->with('success', 'Item edited');
+        $item->update(array_merge($request->all(), [
+            'image' => Item::getDefaultPhotoURL()
+        ]));
+        return redirect()->route('item.index')->with([
+            'success' => __('flash.success.update', ['model' => 'Item'])
+        ]);
     }
 
     /**
@@ -103,23 +101,23 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Item $item)
+    {
+        $item->delete();
+        return redirect()->route('item.index')->with([
+            'success' => __('flash.success.destroy', ['model' => 'Item'])
+        ]);
+    }
+
+    public function changeStatusItem($id)
     {
         $item = Item::find($id);
-        $item->delete();
-        return back()->with('success', 'Item deleted');
-    }
 
-    public function changeStatusItem($id){
-         $item = Item::find($id);
+        $item->status = !$item->status;
+        $item->save();
 
-         $item->status = !$item->status;
-         $item->save();
-
-         return view('item.index', [
+        return view('item.index', [
             'items' => Item::orderBy('created_at', 'desc')->get()
-         ]);
+        ]);
     }
-
-
 }

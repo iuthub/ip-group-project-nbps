@@ -53,4 +53,17 @@ class Order extends Model
     {
         return $query->where('status', self::STATUS_WAITING);
     }
+
+    protected function getStatusAttributeNames()
+    {
+        return [
+            self::STATUS_CLOSED => 'Closed',
+            self::STATUS_WAITING => 'Waiting',
+        ];
+    }
+
+    public function getStatusAttribute()
+    {
+        return $this->getStatusAttributeNames()[$this->attributes['status']];
+    }
 }
