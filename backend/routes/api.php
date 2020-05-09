@@ -31,7 +31,7 @@ Route::group([
      */
     Route::get('categories', 'CategoryController@all');
     Route::get('category/{category}/items', 'CategoryController@items');
-    Route::get('category/{categoty}', 'CategoryController@show');
+    Route::get('category/{category}', 'CategoryController@show');
 
     /**
      * Table routes
