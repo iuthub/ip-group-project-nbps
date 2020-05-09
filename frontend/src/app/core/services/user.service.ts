@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment';
-import { Observable, of, empty, Subject } from 'rxjs';
-import { catchError, mergeMap } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
-import { ToastrService } from 'ngx-toastr';
 import { Profile } from '../models/profile.model';
 import { NotificationService } from './notification.service';
 

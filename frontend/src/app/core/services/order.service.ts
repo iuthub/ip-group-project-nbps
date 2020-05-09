@@ -1,47 +1,47 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { ToastrService } from 'ngx-toastr';
-import { empty, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Order } from '../models/order.model';
+import { Item } from '../models/item.model';
+import { NotificationService } from './notification.service';
 
 const API_DATA_URL = environment.serverUrl;
 
-enum paymentType{cash,card}
+enum paymentType{
+  cash,
+  card
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
 
-  constructor(private http: HttpClient, private toastr: ToastrService) { }
+  constructor(private http: HttpClient, private notificationService: NotificationService) { }
 
-  showErrorMessage(error){
-    console.log(error);
-    this.toastr.error("Something went wrong.");
-    return empty();
-  }
 
-  getAllOrders(): Observable<any> {
+  getAllOrders(): Observable<Order[]> {
     const url = API_DATA_URL+"/orders"
     return this.http.get<any>(url).pipe(
-      catchError(error => this.showErrorMessage(error))
+      catchError(error => this.notificationService.showError(error))
     );
   }
-  getOrderById(id:number): Observable<any> {
+  getOrderById(id:number): Observable<Order> {
     const url = API_DATA_URL+"/order/"+id;
     return this.http.get<any>(url).pipe(
-      catchError(error => this.showErrorMessage(error))
+      catchError(error => this.notificationService.showError(error))
     );
   }
   setOrder(data:{
     payment_type: paymentType,
-    items: Array<any>
+    items: Array<Item[]>
 
   }): Observable<any> {
     const url = API_DATA_URL+"/order";
     return this.http.post<any>(url,data).pipe(
-      catchError(error => this.showErrorMessage(error))
+      catchError(error => this.notificationService.showError(error))
     );
   }
 
