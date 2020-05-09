@@ -1,0 +1,27 @@
+<section class="account">
+
+
+  <div class="container">
+    <h3>Account</h3>
+    <div class="row">
+      <div class="col-lg-2 mb-5">
+        <ul class="nav flex-column nav-pills">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/account']" routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact:true}">Orders</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/account', 'info']" routerLinkActive="active">General Info</a>
+          </li>
+          <li class="nav-item mt-0 mt-lg-5">
+            <a class="nav-link disabled" href="/login" (click)="logout($event)">Logout</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-10">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+
+</section>

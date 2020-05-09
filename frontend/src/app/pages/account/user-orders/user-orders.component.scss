@@ -1,0 +1,17 @@
+.infoblock {
+  &__title {
+    margin-bottom: 1rem;
+  }
+  margin-bottom: var(--p-md);
+}
+.order-panel {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.2rem 0;
+  padding: 0.5rem;
+  background: rgba(0,0,0,0.05);
+  &__title {
+    font-size: 18px;
+    color: rgba(0,0,0,0.8);
+  }
+}
