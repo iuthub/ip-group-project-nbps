@@ -2,8 +2,8 @@ import { Deserializable } from './deserializable.model';
 
 export class Profile implements Deserializable {
   user_id: string;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   address: string;
   phone: string;
   email: string;

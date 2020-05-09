@@ -12,11 +12,9 @@ const API_DATA_URL = environment.serverUrl;
   providedIn: 'root'
 })
 
-
 export class CategoryService {
 
   constructor(private http: HttpClient, private notificationService: NotificationService) { }
-
 
   getAllCategories(): Observable<{categories: Category[]}> {
     const url = API_DATA_URL+"/categories"

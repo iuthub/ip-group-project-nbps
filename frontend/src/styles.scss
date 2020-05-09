@@ -95,6 +95,9 @@ a.hover-link {
   &:hover {
     color: var(--red);
   }
+  &.active {
+    color: var(--red);
+  }
 }
 
 

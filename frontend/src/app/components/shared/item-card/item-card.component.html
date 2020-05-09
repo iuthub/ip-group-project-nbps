@@ -9,7 +9,7 @@
     {{ data.title }}
   </h5>
   <p class="item-card__description">
-    {{ data.description }}
+    {{ data.description | slice : 0 : 120 }}...
   </p>
   <div class="item-card__footer">
     <h6 class="item-card__price">

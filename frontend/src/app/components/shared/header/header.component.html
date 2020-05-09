@@ -32,7 +32,10 @@
     <div class="container">
       <ul class="nav__categories">
         <li *ngFor="let category of categories">
-          <a routerLink="/category/{{ category.id }}" class="hover-link">
+          <a
+            routerLinkActive="active" 
+            routerLink="/category/{{ category.id }}" 
+            class="hover-link">
             {{ category.title }}
           </a>
         </li>
