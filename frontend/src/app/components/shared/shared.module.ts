@@ -4,21 +4,26 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from "@angular/router";
 import { ItemCardComponent } from './item-card/item-card.component';
+import { LoadingComponent } from './loading/loading.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
-    ItemCardComponent
+    ItemCardComponent,
+    LoadingComponent
   ],
   imports: [
     CommonModule, 
-    RouterModule
+    RouterModule,
+    FontAwesomeModule,
   ],
   exports: [
     HeaderComponent, 
     FooterComponent,
-    ItemCardComponent
+    ItemCardComponent, 
+    LoadingComponent
   ],
 })
 

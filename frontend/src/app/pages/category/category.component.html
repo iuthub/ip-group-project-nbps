@@ -1,10 +1,19 @@
 <div class="container">
-    <div class="row" *ngIf="items.length; else elseBlock">
-        <div class="col-lg-4 col-md-6" *ngFor="let item of items">
-            <app-item-card [data]="item"></app-item-card>
-        </div>
-    </div>
-    <ng-template #elseBlock>
-        <h3 class="mt-5 mb-5">No items</h3>
-    </ng-template>
+    <section>
+        <ng-container *ngIf="isLoading; else elseLoading">
+            <app-loading></app-loading>
+        </ng-container>
+        <ng-template #elseLoading>
+            <div class="row" *ngIf="items.length; else elseBlock">
+                <div class="col-lg-4 col-md-6" *ngFor="let item of items">
+                    <app-item-card [data]="item"></app-item-card>
+                </div>
+            </div>
+            <ng-template #elseBlock>
+                <h3 class="text-center mt-5 mb-5">No items</h3>
+            </ng-template>
+        </ng-template>
+
+
+    </section>
 </div>

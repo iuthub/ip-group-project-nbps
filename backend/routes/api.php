@@ -69,6 +69,7 @@ Route::group([
          * Table routes
          */
         Route::get('table/{table}/details', 'TableController@details')->where(['table' => '\d+']);
+        Route::get('table/{table}/status', 'TableController@status');
         /**
          * Booking routes
          */

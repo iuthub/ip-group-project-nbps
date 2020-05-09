@@ -33,4 +33,7 @@ Route::group([
     Route::resource('booking', 'BookingController');
     Route::resource('order', 'OrderController')->except(['create', 'store', 'edit', 'update']);
     Route::resource('order-item', 'OrderItemController')->except(['index', 'show', 'create', 'store', 'edit', 'update']);
+    Route::resource('user', 'UserController');
+    Route::get('user/password/{user}', 'UserController@editPassword')->name('user.editPassword');
+    Route::put('user/password/{user}', 'UserController@updatePassword')->name('user.updatePassword');
 });
