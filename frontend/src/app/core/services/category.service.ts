@@ -18,7 +18,7 @@ export class CategoryService {
   constructor(private http: HttpClient, private notificationService: NotificationService) { }
 
 
-  getAllCategories(): Observable<Category[]> {
+  getAllCategories(): Observable<{categories: Category[]}> {
     const url = API_DATA_URL+"/categories"
     return this.http.get<any>(url).pipe(
       catchError(error => this.notificationService.showError(error))

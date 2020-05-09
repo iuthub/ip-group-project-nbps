@@ -12,7 +12,7 @@ import { takeUntil } from 'rxjs/operators';
 export class CategoryComponent implements OnInit {
   //Subject needed for unsubscribing of observables in the ngOnDestroy hook
   private destroy = new Subject<void>();
-  items: [];
+  items = [];
 
 
   constructor(private route: ActivatedRoute, private categoryService: CategoryService) { }
@@ -23,10 +23,8 @@ export class CategoryComponent implements OnInit {
           this.items = res.items;
         },
       );
-      
-      console.log(this.items);
-      
     });
+
   }
 
 
