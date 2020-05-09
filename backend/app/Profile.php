@@ -13,7 +13,8 @@ class Profile extends Model
         'phone',
         'country',
         'postcode',
-        'address'
+        'address',
+        'city'
     ];
 
     protected $hidden = [
