@@ -55,6 +55,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
         if (res instanceof NavigationEnd) {
           this.nav.nativeElement.classList.remove("is-mobile-active");
           this.hamburger.nativeElement.classList.remove("is-active");
+          this.domService.unlockScroll();
         }
       });
     }
