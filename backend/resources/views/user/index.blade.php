@@ -8,7 +8,7 @@
         <a href="{{ route('user.create') }}" class="btn btn-success">Create user</a>
       </div>
       <div class="col-md-12 mt-3">
-        <table class="table table-stripped">
+        <table class="table table-stripped table-responsive">
           <thead>
             <tr>
               <th>Name</th>
@@ -16,7 +16,7 @@
               <th>Fullname</th>
               <th>Address</th>
               <th>Phone</th>
-              <th>Actions</th>
+              <th width="25%">Actions</th>
             </tr>
           </thead>
           <tbody>
