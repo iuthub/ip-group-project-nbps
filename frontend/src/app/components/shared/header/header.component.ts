@@ -37,6 +37,13 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     this.userService.authChange.pipe(takeUntil(this.destroy)).subscribe(() => {
       this.isAuthenticated = this.userService.isAuthenticated();
     })
+
+    this.categoryService.getAllCategories().pipe(takeUntil(this.destroy)).subscribe(
+      (res) => {
+        this.categories = res.categories;
+      },
+    );
+
   }
 
   ngAfterViewInit(): void {
