@@ -1,0 +1,10 @@
+.account {
+  .nav-item {
+    margin: 0.3rem 0;
+  }
+  .nav-link.active {
+    background: var(--yellow);
+    color: #000;
+    font-weight: 700;
+  }
+}

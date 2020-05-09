@@ -86,12 +86,12 @@ export class LoginComponent implements OnInit {
           token: res.access_token
         };
         window.localStorage.setItem("authorization", JSON.stringify(authorization));
-        
+        this.userService.authChange.next();
         
         setTimeout(() => {
           
           //Emit an event that authorization status changed
-          this.userService.authChange.next();
+          
           this.router.navigate(["/"]);
         }, 3000);
       },

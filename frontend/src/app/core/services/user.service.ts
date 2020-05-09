@@ -7,6 +7,7 @@ import { catchError } from 'rxjs/operators';
 
 import { Profile } from '../models/profile.model';
 import { NotificationService } from './notification.service';
+import { User } from '../models/user.model';
 
 
 const API_DATA_URL = environment.serverUrl;
@@ -77,6 +78,13 @@ export class UserService {
     return false;
   }
 
+  
+  getUserInfo() : Observable<User> {
+    const url = API_DATA_URL+"/account" 
+    return this.http.get<User>(url).pipe(
+      catchError(error => this.notificationService.showError(error))
+    );
+  }
   
   
 
