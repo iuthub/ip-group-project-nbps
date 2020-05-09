@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/core/services/user.service';
+import { Profile } from 'src/app/core/models/profile.model';
+import { User } from 'src/app/core/models/user.model';
 
 @Component({
   selector: 'app-general-info',
@@ -11,11 +13,12 @@ export class GeneralInfoComponent implements OnInit {
   constructor(
     private userService: UserService,
   ) { }
-
+  accountInfo: User
   ngOnInit(): void {
     
     this.userService.getUserInfo().subscribe(res=>{
-      console.log(res);
+      this.accountInfo = res;
+      console.log(this.accountInfo.profile);
     })
     
   }
