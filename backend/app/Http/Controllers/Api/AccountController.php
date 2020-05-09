@@ -16,7 +16,9 @@ class AccountController extends Controller
 
     public function show()
     {
-        return User::with('profile')->find(Auth::guard('api')->user()->id);
+        $userID = Auth::guard('api')->user()->id;
+        $user = User::with('profile')->where('id', $userID)->first();
+        return response()->json($user, 200);
     }
 
     public function update(AccountUpdateFormRequest $request)
