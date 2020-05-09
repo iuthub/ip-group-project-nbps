@@ -4,6 +4,7 @@ import { UserService } from 'src/app/core/services/user.service';
 import { CategoryService } from 'src/app/core/services/category.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -15,6 +16,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   private destroy = new Subject<void>();
   @ViewChild("nav", { static: false }) nav: ElementRef<HTMLElement>;
   @ViewChild("navTop", { static: false }) navTop: ElementRef<HTMLElement>;
+  @ViewChild("hamburger", { static: false }) hamburger: ElementRef<HTMLElement>;
 
 
   isNavOpen = false;
@@ -24,7 +26,8 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private domService: DOMService,
     private userService: UserService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private router: Router,
   ) {
 
     // To prevent loss of context in event Listener
@@ -44,6 +47,17 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
       },
     );
 
+
+
+    //Mobile - Close nav on navigation 
+    if (window.matchMedia("screen and (max-width: 414px)").matches) {
+      this.router.events.subscribe((res) => {
+        if (res instanceof NavigationEnd) {
+          this.nav.nativeElement.classList.remove("is-mobile-active");
+          this.hamburger.nativeElement.classList.remove("is-active");
+        }
+      });
+    }
   }
 
   ngAfterViewInit(): void {
@@ -66,6 +80,8 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
       this.domService.unlockScroll();
     }
   }
+
+
 
   ngOnDestroy(): void {
     window.removeEventListener("scroll", this.onScroll);
