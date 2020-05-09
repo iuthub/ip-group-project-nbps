@@ -14,7 +14,7 @@ export class IndexComponent implements OnInit {
       title: "Plov", 
       description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.",
       price: 72000, 
-      main_image: "/assets/images/main_image.jpg"
+      image: "img/default-item-photo.jpg"
       
     },
     {
@@ -22,7 +22,7 @@ export class IndexComponent implements OnInit {
       title: "Plov", 
       description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.",
       price: 72000, 
-      main_image: "/assets/images/main_image.jpg"
+      image: "img/default-item-photo.jpg"
       
     },
     {
@@ -30,7 +30,7 @@ export class IndexComponent implements OnInit {
       title: "Plov", 
       description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.",
       price: 72000, 
-      main_image: "/assets/images/main_image.jpg"
+      image: "img/default-item-photo.jpg"
       
     },
     {
@@ -38,7 +38,7 @@ export class IndexComponent implements OnInit {
       title: "Plov", 
       description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.",
       price: 72000, 
-      main_image: "/assets/images/main_image.jpg"
+      image: "img/default-item-photo.jpg"
       
     },
   ];

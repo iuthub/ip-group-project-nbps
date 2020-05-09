@@ -8,7 +8,7 @@ export class Item implements Deserializable {
   price : number;
   category: Category;
   active: boolean;
-  main_image: string;
+  image: string;
   deserialize(input: any): this {
     Object.assign(this, input);
     this.category = new Category().deserialize(input.category);
