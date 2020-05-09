@@ -31,29 +31,9 @@
   <div class="nav__bottom">
     <div class="container">
       <ul class="nav__categories">
-        <li>
-          <a href="/category/plov" class="hover-link">
-            Plov
-          </a>
-        </li>
-        <li>
-          <a href="/category/salads" class="hover-link">
-            salads
-          </a>
-        </li>
-        <li>
-          <a href="/category/drinks" class="hover-link">
-            drinks
-          </a>
-        </li>
-        <li>
-          <a href="/category/sets" class="hover-link">
-            sets
-          </a>
-        </li>
-        <li>
-          <a href="/tables" class="hover-link">
-            Tables
+        <li *ngFor="let category of categories">
+          <a routerLink="/category/{{ category.id }}" class="hover-link">
+            {{ category.title }}
           </a>
         </li>
       </ul>

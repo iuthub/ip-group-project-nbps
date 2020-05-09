@@ -10,12 +10,17 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AuthGuard } from './core/guards/auth.guard';
 
+import { CategoryComponent } from './pages/category/category.component';
+
 
 const routes: Routes = [
   { path: '', component: IndexComponent, pathMatch: 'full' },
   { path: 'menu', component: MenuComponent },
   { path: 'about', component: AboutComponent },
   { path: 'contacts', component: ContactsComponent },
+  {
+    path: 'category/:id', component: CategoryComponent, data:{title: "ssdf"}
+  },
   { path: 'tables', component: TablesComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
