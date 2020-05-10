@@ -1,10 +1,11 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { DOMService } from 'src/app/core/services/dom.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { CategoryService } from 'src/app/core/services/category.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Router, NavigationEnd } from '@angular/router';
+import { CartService } from 'src/app/core/services/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -17,17 +18,22 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild("nav", { static: false }) nav: ElementRef<HTMLElement>;
   @ViewChild("navTop", { static: false }) navTop: ElementRef<HTMLElement>;
   @ViewChild("hamburger", { static: false }) hamburger: ElementRef<HTMLElement>;
+  @ViewChild("cartBtn", { static: false }) cartBtn: ElementRef<HTMLElement>;
 
 
   isNavOpen = false;
   isAuthenticated = false;
   categories = [];
 
+  cartItemsNumber = 0;
+
   constructor(
     private domService: DOMService,
     private userService: UserService,
     private categoryService: CategoryService,
     private router: Router,
+    private cartService: CartService,
+    private cdr: ChangeDetectorRef,
   ) {
 
     // To prevent loss of context in event Listener
@@ -59,6 +65,20 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       });
     }
+
+
+    //Cart logic
+    this.cartService.cartChanged.pipe(takeUntil(this.destroy)).subscribe(res => {
+      this.cartItemsNumber = res;
+      
+      //Cart added css animation class
+      if (this.cartBtn) {
+        this.cartBtn.nativeElement.classList.add("pulse");
+        setTimeout(() => {
+          this.cartBtn.nativeElement.classList.remove("pulse");
+        }, 300);
+      }
+    })
   }
 
   ngAfterViewInit(): void {
