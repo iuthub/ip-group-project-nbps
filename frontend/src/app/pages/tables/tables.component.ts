@@ -26,7 +26,7 @@ export class TablesComponent implements OnInit {
     private toastr: ToastrService
   ) { }
 
-  choosedTable: Number;
+  // choosedTable: Number;
   choosedId: Number;
   tables: Table[];
   isLoading = true;
@@ -34,6 +34,7 @@ export class TablesComponent implements OnInit {
   time;
   date;
   peopleCount;
+  choosedTable;
 
   ngOnInit(): void {
 
@@ -71,36 +72,34 @@ export class TablesComponent implements OnInit {
       seconds = '0' + seconds;
     return [hours, minutes, seconds].join(':');
   }
-  book(id, date, time, peopleCount) {
+  book(table, date, time) {
     let params = new HttpParams();
     params = params.append('book_date', this.formatDate(date));
     params = params.append('book_time', this.formatTime(time));
-    this.tableService.getTableStatus(id, params).pipe(takeUntil(this.destroy)).subscribe(
+    this.tableService.getTableStatus(table.id, params).pipe(takeUntil(this.destroy)).subscribe(
       (res) => {
         this.status = res;
-        console.log(this.status);
         if (this.status.free) {
           let data = {
             book_date: this.formatDate(date),
             book_time: this.formatTime(time),
-            people_count: peopleCount
+            people_count: table.people_count
           }
-          this.bookingService.setBookOfTableById(id, data).pipe(takeUntil(this.destroy)).subscribe(
+          this.bookingService.setBookOfTableById(table.id, data).pipe(takeUntil(this.destroy)).subscribe(
             (res) => {
-              this.toastr.success("Table was booked");
+              this.toastr.success("Table #"+table.number+" was booked");
+              this.modalRef.hide();
             }
           );
         } else {
-          this.toastr.error("Table is busy.");
+          this.toastr.error("Table #"+table.number+" is busy.");
         }
       });
 
   }
 
-  openModal(template: TemplateRef<any>, id: Number, number: Number, count) {
-    this.choosedTable = number;
-    this.choosedId = id;
-    this.peopleCount = count;
+  openModal(template: TemplateRef<any>, table: {}) {
+    this.choosedTable = table;
     this.modalRef = this.modalService.show(template);
   }
 
