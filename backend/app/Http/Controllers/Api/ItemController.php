@@ -28,4 +28,14 @@ class ItemController extends Controller
             $item
         ]);
     }
+
+    public function search(Request $request)
+    {
+        $this->validate($request, [
+            'title' => 'required'
+        ]);
+        $items = Item::where('title', 'like', "%{$request->get('title')}%")->get();
+
+        return response()->json($items, 200);
+    }
 }

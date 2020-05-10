@@ -43,6 +43,7 @@ Route::group([
     Route::get('items', 'ItemController@all');
     Route::get('item/{item}/category', 'ItemController@category');
     Route::get('item/{item}', 'ItemController@show');
+    Route::get('items/search', 'ItemController@search');
 
     /**
      * 
