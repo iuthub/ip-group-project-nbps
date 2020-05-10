@@ -3,6 +3,9 @@ import { Item } from 'src/app/core/models/item.model';
 import { CartService } from 'src/app/core/services/cart.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { environment } from '../../../../environments/environment';
+
+
 
 @Component({
   selector: 'app-item-card',
@@ -12,6 +15,9 @@ import { Subject } from 'rxjs';
 export class ItemCardComponent implements OnInit {
   //Subject needed for unsubscribing of observables in the ngOnDestroy hook
   private destroy = new Subject<void>();
+  
+  storageUrl = environment.storageUrl;
+  
   
   @Input()
   data: Item;

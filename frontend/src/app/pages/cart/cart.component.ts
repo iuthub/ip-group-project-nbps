@@ -9,6 +9,9 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from '../../../environments/environment';
+
+
 
 @Component({
   selector: 'app-cart',
@@ -16,6 +19,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
+  storageUrl = environment.storageUrl;
 
   //Subject needed for unsubscribing of observables in the ngOnDestroy hook
   private destroy = new Subject<void>();
