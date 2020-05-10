@@ -26,7 +26,7 @@ class BookingController extends Controller
     }
 
     public function book(BookTableFormRequest $request, Table $table)
-    {w
+    {
         if ($request->get('people_count') > $table->people_count) {
             return response()->json([
                 'message' => 'People count is bigger than the threshold'
