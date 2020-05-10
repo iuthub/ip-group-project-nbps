@@ -69,6 +69,9 @@ export class CartService {
       }
     }
   }
+  set(cart: Item[]): void {
+    window.localStorage.setItem("cart", JSON.stringify(cart));
+  }
 
 
 

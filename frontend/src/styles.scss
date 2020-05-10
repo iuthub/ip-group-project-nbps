@@ -161,12 +161,21 @@ section {
       background: var(--red);
       color: #fff;
     }
+    &yellow {
+      background: var(--yellow);
+      color: #000;
+    }
+    &transparent {
+      background: none;
+    }
   }
   &.disabled {
     pointer-events: none;
   }
 }
-
+.text-transparent {
+  opacity: 0.7;
+}
 
 .error {
   color: var(--red);

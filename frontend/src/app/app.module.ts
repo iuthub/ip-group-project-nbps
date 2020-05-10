@@ -34,6 +34,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
 import { CategoryComponent } from './pages/category/category.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
@@ -54,6 +55,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     LoginComponent,
     RegisterComponent,
     CategoryComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
