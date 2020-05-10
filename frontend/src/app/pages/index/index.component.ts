@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from 'src/app/core/models/item.model';
 import { Subject } from 'rxjs';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from 'src/app/core/services/category.service';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, concatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-index',
@@ -21,12 +21,19 @@ export class IndexComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = true;
-    this.categoryService.getItemsByCategoryId(1).pipe(takeUntil(this.destroy)).subscribe(
+    this.categoryService.getAllCategories().pipe(
+      takeUntil(this.destroy),
+      concatMap(res => this.categoryService.getItemsByCategoryId(res.categories[0].id))
+    ).subscribe(
       (res) => {
         this.items = res.items;
         this.isLoading = false;
       },
     );
+  }
+  ngOnDestroy() {
+    this.destroy.next();
+    this.destroy.complete();
   }
 
 }

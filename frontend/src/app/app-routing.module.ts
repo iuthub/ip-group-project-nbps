@@ -4,7 +4,7 @@ import { IndexComponent } from './pages/index/index.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { MenuComponent } from './pages/menu/menu.component';
 import { ContactsComponent } from './pages/contacts/contacts.component';
-import { TablesComponent } from './pages/tables/tables.component';
+import { BookingComponent } from './pages/booking/booking.component';
 import { AboutComponent } from './pages/about/about.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
@@ -22,7 +22,7 @@ const routes: Routes = [
   {
     path: 'category/:id', component: CategoryComponent
   },
-  { path: 'tables', component: TablesComponent },
+  { path: 'booking', component: BookingComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   {

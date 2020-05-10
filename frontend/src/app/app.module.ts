@@ -9,7 +9,7 @@ import { ErrorComponent } from './pages/error/error.component';
 import { MenuComponent } from './pages/menu/menu.component';
 import { ContactsComponent } from './pages/contacts/contacts.component';
 import { AboutComponent } from './pages/about/about.component';
-import { TablesComponent } from './pages/tables/tables.component';
+import { BookingComponent } from './pages/booking/booking.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -53,7 +53,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     ErrorComponent,
     MenuComponent,
     ContactsComponent,
-    TablesComponent,
+    BookingComponent,
     AboutComponent,
     LoginComponent,
     RegisterComponent,

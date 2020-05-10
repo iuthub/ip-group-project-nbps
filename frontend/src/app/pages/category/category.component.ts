@@ -31,6 +31,9 @@ export class CategoryComponent implements OnInit {
 
   }
 
-
+  ngOnDestroy() {
+    this.destroy.next();
+    this.destroy.complete();
+  }
 
 }

@@ -15,43 +15,47 @@ export class UserOrdersComponent implements OnInit {
 
   //Subject needed for unsubscribing of observables in the ngOnDestroy hook
   private destroy = new Subject<void>();
-  
+
   isOrdersLoading = true;
   isBookingsLoading = true;
-  
-  constructor( 
+
+  constructor(
     private orderService: OrderService,
     private bookingService: BookingService,
   ) { }
-  
-  orders :Order[] = [];
-  bookings : Booking[] = [];
+
+  orders: Order[] = [];
+  bookings: Booking[] = [];
 
   ngOnInit(): void {
-    
-    
-    this.orderService.getAllOrders().pipe(takeUntil(this.destroy)).subscribe((res)=>{
-      this.isOrdersLoading = false;
+
+
+    this.orderService.getAllOrders().pipe(takeUntil(this.destroy)).subscribe((res) => {
       this.orders = res.orders;
-    });
-    
-    this.bookingService.getAllBookings().pipe(takeUntil(this.destroy)).subscribe((res)=>{
-      this.isBookingsLoading = false;
+    },
+      null,
+      () => this.isOrdersLoading = false
+    );
+
+    this.bookingService.getAllBookings().pipe(takeUntil(this.destroy)).subscribe((res) => {
       this.bookings = res;
-    });
+    },
+      null,
+      () => this.isBookingsLoading = false
+    );
   }
-  
-  
-  formatDate(date : string){
+
+
+  formatDate(date: string) {
     return new Date(date).toLocaleDateString('en-US', {
       month: 'long',
       day: '2-digit',
       year: 'numeric',
     })
   }
- 
-  
-  
+
+
+
   ngOnDestroy() {
     this.destroy.next();
     this.destroy.complete();

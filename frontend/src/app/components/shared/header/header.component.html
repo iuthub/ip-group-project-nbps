@@ -6,20 +6,20 @@
           <img src="/assets/images/iPlove_wide.svg" alt="">
         </a>
       </div>
-      <div class="nav__section d-none d-md-block">
+      <div class="nav__section d-none d-lg-block">
         <a href="tel:+998712008080" class="nav__number hover-link">
           (71) 200 - 80 - 80
         </a>
       </div>
       <div class="nav__section">
-        <a *ngIf="isAuthenticated" [routerLink]="['/account']" class="btn btn-default d-none d-md-inline-block">
+        <a *ngIf="isAuthenticated" [routerLink]="['/account']" class="btn btn-default d-none d-lg-inline-block">
           Account
         </a>
-        <a *ngIf="!isAuthenticated" [routerLink]="['/login']" class="btn btn-default d-none d-md-inline-block">
+        <a *ngIf="!isAuthenticated" [routerLink]="['/login']" class="btn btn-default d-none d-lg-inline-block">
           Login
         </a>
 
-        <div (click)="onHamburgerClick($event)" #hamburger class="hamburger hamburger--elastic d-inline-block d-md-none">
+        <div (click)="onHamburgerClick($event)" #hamburger class="hamburger hamburger--elastic d-inline-block d-lg-none">
           <div class="hamburger-box">
             <div class="hamburger-inner"></div>
           </div>
@@ -30,7 +30,7 @@
   </div>
   <div class="nav__bottom">
     <div class="container">
-      <ul class="nav__categories">
+      <ul class="nav__categories" *ngIf="categories.length">
         <li *ngFor="let category of categories">
           <a
             routerLinkActive="active" 
@@ -39,15 +39,23 @@
             {{ category.title }}
           </a>
         </li>
+        <li>
+          <a
+            routerLinkActive="active" 
+            routerLink="/booking" 
+            class="hover-link">
+            Booking
+          </a>
+        </li>
       </ul>
-      <div class="d-flex align-items-center justify-content-between">
-        <a routerLink="/cart" class="btn btn-action" #cartBtn>
+      <div class="d-flex align-items-center">
+        <a routerLink="/cart" class="ml-auto btn btn-action" #cartBtn>
           Cart <b>({{ cartItemsNumber }})</b>
         </a>
-        <a *ngIf="isAuthenticated" [routerLink]="['/account']" class="btn btn-default d-inline-block d-md-none">
+        <a *ngIf="isAuthenticated" [routerLink]="['/account']" class="btn btn-default d-inline-block d-lg-none">
           Account
         </a>
-        <a *ngIf="!isAuthenticated" [routerLink]="['/login']" class="btn btn-default d-inline-block d-md-none">
+        <a *ngIf="!isAuthenticated" [routerLink]="['/login']" class="btn btn-default d-inline-block d-lg-none">
           Login
         </a>
       </div>

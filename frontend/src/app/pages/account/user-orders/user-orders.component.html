@@ -7,7 +7,7 @@
     <app-loading></app-loading>
   </ng-container>
   <ng-template #elseOrdersLoading>
-    <div class="infoblock__table">
+    <div class="infoblock__table" *ngIf="orders.length; else elseOrderBlock">
       <div class="order-panel" *ngFor="let order of orders">
         <h5 class="order-panel__title">
           {{ formatDate(order.updated_at) }}
@@ -29,7 +29,7 @@
     <app-loading></app-loading>
   </ng-container>
   <ng-template #elseBookingsLoading>
-    <div class="infoblock__table">
+    <div class="infoblock__table" *ngIf="bookings.length; else elseBookingBlock">
       <div class="order-panel" *ngFor="let booking of bookings">
         <h5 class="order-panel__title">
           {{ formatDate(booking.book_date) }} {{ booking.book_time }}
@@ -39,7 +39,7 @@
         </div>
       </div>
     </div>
-    <ng-template #elseOrderBlock>
+    <ng-template #elseBookingBlock>
       <h3 class="text-center mt-5 mb-5">No items</h3>
     </ng-template>
   </ng-template>

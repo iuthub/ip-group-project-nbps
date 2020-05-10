@@ -1,0 +1,47 @@
+<div class="container">
+    <section>
+        <h3>Booking tables</h3>
+        <ng-container *ngIf="isLoading; else elseLoading">
+            <app-loading></app-loading>
+        </ng-container>
+        <ng-template #elseLoading>
+            <div class="row">
+                <div class="col-lg-4 col-md-6" *ngFor="let table of tables">
+                    <div class="table-block m-2" (click)="openModal(templateModal,table)">
+                        <h3>Table {{ table.number }}</h3>
+                        <h6>People # {{ table.people_count }}</h6>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+
+    </section>
+</div>
+
+
+<ng-template #templateModal>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Table #{{ choosedTable.number }}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-4 form-group">
+                <input type="text" placeholder="Datepicker" class="form-control" [(ngModel)]="date" bsDatepicker>
+            </div>
+            <div class="col-md-4 form-group">
+                <timepicker [(ngModel)]="time" [showMeridian]="false" [showSpinners]="false"></timepicker>
+            </div>
+            <div class="col-md-4 form-group">
+                <button (click)="book(choosedTable,date,time)" class="btn btn-default">Book</button>
+            </div>
+            <div class="col-12">
+                <div class="error text-center" *ngIf="this.hasErrors">
+                    {{ errorMsg }}
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
