@@ -1,26 +1,38 @@
 <div class="container mt-3 mb-3">
     <h3>Tables</h3>
     <div class="row">
-        <div class="col-lg-4 col-md-6" *ngFor="let table of tables">
-            <div class="table-block m-2" (click)="openModal(templateModal,table.id)">
-                <h3>{{table.id}}</h3>
+        <ng-container *ngIf="isLoading; else elseLoading">
+            <app-loading></app-loading>
+        </ng-container>
+        <ng-template #elseLoading>
+            <div class="col-lg-4 col-md-6" *ngFor="let table of tables">
+                <div class="table-block m-2" (click)="openModal(templateModal,table.id,table.number)">
+                    <h3>{{ table.number }}</h3>
+                </div>
             </div>
-        </div>
+        </ng-template>
+
     </div>
 
 </div>
 
 <ng-template #templateModal>
     <div class="modal-header">
-        <h4 class="modal-title pull-left">Table {{ choosedId }}</h4>
+        <h4 class="modal-title pull-left">Table {{ choosedTable }}</h4>
         <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
         <div class="row">
-            <div class="col-xs-12 col-12 col-md-4 form-group">
-                <input type="text" placeholder="Datepicker" class="form-control" bsDatepicker>
+            <div class="col-md-4 form-group">
+                <input type="text" placeholder="Datepicker" class="form-control" [(ngModel)]="date" bsDatepicker>
+            </div>
+            <div class="col-md-4 form-group">
+                <timepicker [(ngModel)]="time" [showMeridian]="false" [showSpinners]="false"></timepicker>
+            </div>
+            <div class="col-md-4 form-group">
+                <button (click)="book(choosedId,date,time)" class="btn btn-default">Book</button>
             </div>
         </div>
     </div>

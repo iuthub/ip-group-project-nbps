@@ -25,7 +25,6 @@ export class GeneralInfoComponent implements OnInit {
       (res) => {
         this.accountInfo = res;
         this.isLoading = false;
-        console.log(this.accountInfo);
       })
 
   }

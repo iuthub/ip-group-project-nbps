@@ -35,6 +35,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
 import { CategoryComponent } from './pages/category/category.component';
 
+// TimePicker
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   slidesPerView: 1,
@@ -64,6 +67,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     SwiperModule,
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    TimepickerModule.forRoot(),
     FontAwesomeModule,
     ToastrModule.forRoot(
       {
