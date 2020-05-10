@@ -35,7 +35,7 @@ export class TableService {
 
   getTableStatus(id: number,data): Observable<any> {
     const url = API_DATA_URL + "/table/" + id + "/status"
-    return this.http.get<any>(url, data).pipe(
+    return this.http.get<any>(url, {params: data}).pipe(
       catchError(error => this.notificationService.showError(error))
     );
   }

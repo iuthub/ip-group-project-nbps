@@ -4,6 +4,7 @@ import { Table } from 'src/app/core/models/table.model';
 import { Subject } from 'rxjs';
 import { TableService } from 'src/app/core/services/table.service';
 import { takeUntil } from 'rxjs/operators';
+import { HttpParams } from '@angular/common/http';
 
 
 @Component({
@@ -41,6 +42,9 @@ export class TablesComponent implements OnInit {
       book_date: "2015-06-14",
       book_time: "11:25:00"
     }
+    let params = new HttpParams();
+    params = params.append('book_date', date);
+    params = params.append('book_time', time);
     this.tableService.getTableStatus(id, data).pipe(takeUntil(this.destroy)).subscribe(
       (res) => {
         this.status = res;
