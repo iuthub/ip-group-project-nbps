@@ -1,21 +1,22 @@
 <div class="container mt-3 mb-3">
-    <h3>Tables</h3>
-    <div class="row">
-        <ng-container *ngIf="isLoading; else elseLoading">
-            <app-loading></app-loading>
-        </ng-container>
-        <ng-template #elseLoading>
-            <div class="col-lg-4 col-md-6" *ngFor="let table of tables">
-                <div class="table-block m-2" (click)="openModal(templateModal,table)">
-                    <h3>Table #{{ table.number }}</h3>
-                    <h6>People #{{table.people_count}}</h6>
+    <section>
+        <h3>Tables</h3>
+        <div class="row">
+            <ng-container *ngIf="isLoading; else elseLoading">
+                <app-loading></app-loading>
+            </ng-container>
+            <ng-template #elseLoading>
+                <div class="col-lg-4 col-md-6" *ngFor="let table of tables">
+                    <div class="table-block m-2" (click)="openModal(templateModal,table)">
+                        <h3>Table #{{ table.number }}</h3>
+                        <h6>People #{{ table.people_count }}</h6>
+                    </div>
                 </div>
-            </div>
-        </ng-template>
-
-    </div>
-
+            </ng-template>
+        </div>
+    </section>
 </div>
+
 
 <ng-template #templateModal>
     <div class="modal-header">
@@ -34,6 +35,11 @@
             </div>
             <div class="col-md-4 form-group">
                 <button (click)="book(choosedTable,date,time)" class="btn btn-default">Book</button>
+            </div>
+            <div class="col-12">
+                <div class="error text-center" *ngIf="this.hasErrors">
+                    {{ errorMsg }}
+                </div>
             </div>
         </div>
     </div>

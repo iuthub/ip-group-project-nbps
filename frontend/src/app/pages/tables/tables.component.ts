@@ -3,7 +3,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Table } from 'src/app/core/models/table.model';
 import { Subject } from 'rxjs';
 import { TableService } from 'src/app/core/services/table.service';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, isEmpty } from 'rxjs/operators';
 import { HttpParams } from '@angular/common/http';
 import { BookingService } from 'src/app/core/services/booking.service';
 import { ToastrService } from 'ngx-toastr';
@@ -26,14 +26,13 @@ export class TablesComponent implements OnInit {
     private toastr: ToastrService
   ) { }
 
-  // choosedTable: Number;
-  choosedId: Number;
   tables: Table[];
   isLoading = true;
+  hasErrors = false;
+  errorMsg = '';
   status;
   time;
   date;
-  peopleCount;
   choosedTable;
 
   ngOnInit(): void {
@@ -73,28 +72,34 @@ export class TablesComponent implements OnInit {
     return [hours, minutes, seconds].join(':');
   }
   book(table, date, time) {
-    let params = new HttpParams();
-    params = params.append('book_date', this.formatDate(date));
-    params = params.append('book_time', this.formatTime(time));
-    this.tableService.getTableStatus(table.id, params).pipe(takeUntil(this.destroy)).subscribe(
-      (res) => {
-        this.status = res;
-        if (this.status.free) {
-          let data = {
-            book_date: this.formatDate(date),
-            book_time: this.formatTime(time),
-            people_count: table.people_count
-          }
-          this.bookingService.setBookOfTableById(table.id, data).pipe(takeUntil(this.destroy)).subscribe(
-            (res) => {
-              this.toastr.success("Table #"+table.number+" was booked");
-              this.modalRef.hide();
+    if (!date || !time) {
+      this.hasErrors = true;
+      this.errorMsg = "Please enter all fields"
+    } else {
+      let params = new HttpParams();
+      params = params.append('book_date', this.formatDate(date));
+      params = params.append('book_time', this.formatTime(time));
+      this.tableService.getTableStatus(table.id, params).pipe(takeUntil(this.destroy)).subscribe(
+        (res) => {
+          this.status = res;
+          if (this.status.free) {
+            let data = {
+              book_date: this.formatDate(date),
+              book_time: this.formatTime(time),
+              people_count: table.people_count
             }
-          );
-        } else {
-          this.toastr.error("Table #"+table.number+" is busy.");
-        }
-      });
+            this.bookingService.setBookOfTableById(table.id, data).pipe(takeUntil(this.destroy)).subscribe(
+              (res) => {
+                this.toastr.success("Table #" + table.number + " was booked");
+                this.modalRef.hide();
+              }
+            );
+          } else {
+            this.hasErrors = true;
+            this.errorMsg = "Table #" + table.number + " at this time is busy.";
+          }
+        });
+    }
 
   }
 
