@@ -25,9 +25,13 @@ export class BookingService {
     );
   }
 
-  setBookOfTableById(id: number): Observable<any> {
+  setBookOfTableById(id: number,data:{
+    book_date: string,
+    book_time: string,
+    people_count: number
+  }): Observable<any> {
     const url = API_DATA_URL + "/book/table/" + id;
-    return this.http.post<any>(url,{}).pipe(
+    return this.http.post<any>(url,data).pipe(
       catchError(error => this.notificationService.showError(error))
     );
   }

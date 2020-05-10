@@ -6,8 +6,9 @@
         </ng-container>
         <ng-template #elseLoading>
             <div class="col-lg-4 col-md-6" *ngFor="let table of tables">
-                <div class="table-block m-2" (click)="openModal(templateModal,table.id,table.number)">
-                    <h3>{{ table.number }}</h3>
+                <div class="table-block m-2" (click)="openModal(templateModal,table.id,table.number,table.people_count)">
+                    <h3>Table #{{ table.number }}</h3>
+                    <h6>People #{{table.people_count}}</h6>
                 </div>
             </div>
         </ng-template>
@@ -32,7 +33,7 @@
                 <timepicker [(ngModel)]="time" [showMeridian]="false" [showSpinners]="false"></timepicker>
             </div>
             <div class="col-md-4 form-group">
-                <button (click)="book(choosedId,date,time)" class="btn btn-default">Book</button>
+                <button (click)="book(choosedId,date,time,peopleCount)" class="btn btn-default">Book</button>
             </div>
         </div>
     </div>
