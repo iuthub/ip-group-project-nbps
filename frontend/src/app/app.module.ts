@@ -38,6 +38,7 @@ import { CartComponent } from './pages/cart/cart.component';
 
 // TimePicker
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { SearchComponent } from './pages/search/search.component';
 
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
@@ -59,6 +60,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     RegisterComponent,
     CategoryComponent,
     CartComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

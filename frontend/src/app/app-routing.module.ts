@@ -12,6 +12,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 
 import { CategoryComponent } from './pages/category/category.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { SearchComponent } from './pages/search/search.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'booking', component: BookingComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'search', component: SearchComponent },
   {
     path: 'account',
     loadChildren: () => import('./pages/account/account.module').then(m => m.AccountModule),
