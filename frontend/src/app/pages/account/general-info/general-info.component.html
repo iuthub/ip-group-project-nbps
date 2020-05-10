@@ -1,5 +1,57 @@
 <div class="infoblock">
-    <h6 class="infoblock__title">Account info</h6>
-    
-  
-  </div>
+    <ng-container *ngIf="isLoading; else elseLoading">
+        <app-loading></app-loading>
+    </ng-container>
+    <ng-template #elseLoading>
+        <!-- <h6>Username</h6>
+        <h4>{{ accountInfo.name }}</h4> -->
+        <!-- <div class="d-flex">
+            <div class="mr-4">
+                <h6>First Name</h6>
+                <h4>{{ accountInfo.profile.firstname }}</h4>
+            </div>
+            <div class="">
+                <h6>Last Name</h6>
+                <h4>{{ accountInfo.profile.lastname }}</h4>
+            </div>
+        </div> -->
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <h6>Username</h6>
+                <h4>{{ accountInfo.name }}</h4>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <h6>First Name</h6>
+                <h4>{{ accountInfo.profile.firstname }}</h4>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <h6>Last Name</h6>
+                <h4>{{ accountInfo.profile.lastname }}</h4>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <h6>Email</h6>
+                <h4>{{ accountInfo.email }}</h4>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <h6>Country</h6>
+                <h4>{{ accountInfo.profile.country }}</h4>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <h6>City</h6>
+                <h4>{{ accountInfo.profile.city }}</h4>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <h6>Address</h6>
+                <h4>{{ accountInfo.profile.address }}</h4>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <h6>Postcode</h6>
+                <h4>{{ accountInfo.profile.postcode }}</h4>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <h6>Phone number</h6>
+                <h4>{{ accountInfo.profile.phone }}</h4>
+            </div>
+        </div>
+    </ng-template>
+</div>

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/core/services/user.service';
 import { Profile } from 'src/app/core/models/profile.model';
 import { User } from 'src/app/core/models/user.model';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-general-info',
@@ -10,17 +12,22 @@ import { User } from 'src/app/core/models/user.model';
 })
 export class GeneralInfoComponent implements OnInit {
 
+  //Subject needed for unsubscribing of observables in the ngOnDestroy hook
+  private destroy = new Subject<void>();
+
   constructor(
     private userService: UserService,
   ) { }
-  accountInfo: User
+  accountInfo;
+  isLoading = true;
   ngOnInit(): void {
-    
-    this.userService.getUserInfo().subscribe(res=>{
-      this.accountInfo = res;
-      console.log(this.accountInfo.profile);
-    })
-    
+    this.userService.getUserInfo().pipe(takeUntil(this.destroy)).subscribe(
+      (res) => {
+        this.accountInfo = res;
+        this.isLoading = false;
+        console.log(this.accountInfo);
+      })
+
   }
 
 }

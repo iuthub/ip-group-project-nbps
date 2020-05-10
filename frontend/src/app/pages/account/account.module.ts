@@ -4,6 +4,7 @@ import { AccountComponent } from './account.component';
 import { GeneralInfoComponent } from './general-info/general-info.component';
 import { UserOrdersComponent } from './user-orders/user-orders.component';
 import { AccountRoutingModule } from './account.routing';
+import { SharedModule } from 'src/app/components/shared/shared.module';
 
 
 
@@ -12,6 +13,7 @@ import { AccountRoutingModule } from './account.routing';
   imports: [
     CommonModule, 
     AccountRoutingModule, 
+    SharedModule
   ]
 })
 export class AccountModule { }
