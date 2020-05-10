@@ -20,7 +20,7 @@
           <th>Title</th>
           <th>Description</th>
           <th>Status</th>
-          <th colspan="3">Actions</th>
+          <th width="15%">Actions</th>
         </tr>
         @if(count($categories) > 0)
         @foreach ($categories as $category)
@@ -28,12 +28,12 @@
           <td>{{ $category->title }}</td>
           <td>{{ $category->description }}</td>
           <td>{{ $category->status }}</td>
-          <td><a href="{{ route('category.edit', $category->id) }}" class="btn btn-secondary">Edit</a></td>
           <td>
-            <form method="post" action="{{ route('category.destroy', $category->id) }}">
+            <a href="{{ route('category.edit', $category->id) }}" class="btn btn-secondary">Edit</a>
+            <a href="#" class="btn btn-danger" id="category-delete-btn">Delete</a>
+            <form method="post" action="{{ route('category.destroy', $category->id) }}" id="category-delete-form">
               @csrf
               @method('delete')
-              <button type="submit" class="btn btn-danger">Delete</button>
             </form>
           </td>
         </tr>
@@ -48,3 +48,14 @@
   </div>
 </div>
 @endsection
+@push('scripts')
+<script>
+  document.getElementById('category-delete-btn').addEventListener('click', function() {
+    event.preventDefault();
+    if (confirm('Are you sure?')) {
+      document.getElementById('category-delete-form').submit();
+    }
+  });
+
+</script>
+@endpush
