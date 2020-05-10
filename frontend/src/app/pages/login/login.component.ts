@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import {Location} from '@angular/common';
+
 
 @Component({
   selector: 'app-login',

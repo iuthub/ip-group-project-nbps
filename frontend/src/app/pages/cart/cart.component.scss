@@ -1,0 +1,123 @@
+@import "../../../styles/utils.scss";
+
+.cart {
+  &__items {}
+  &__status {
+    position: sticky;
+    top: 130px;
+  }
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  padding: 1rem;
+  border-radius: 5px;
+  background: rgba($color: #000000, $alpha: 0.02);
+  margin-bottom: 0.5rem;
+
+  
+  
+  &__index {
+    width: 2em;
+    font-weight: 700;
+  }
+  
+  &__profile {
+    border-radius: 10px;
+    overflow: hidden;
+    width: 3em;
+    height: 3em;
+    margin-right: 1em;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__title {
+    min-width: 40%;
+    flex-grow: 1;
+  }
+
+  &__price {
+    margin-left: 1rem;
+    flex-grow: 1;
+    font-weight: 700;
+  }
+
+
+  @include md {
+    flex-wrap: wrap;
+    font-size: 1rem;
+
+    &__index {
+      width: 3em;
+    }
+
+    &__profile {
+      display: none;
+    }
+    &__title {
+      max-width: 50%;
+      width: auto;
+      flex-grow: 1;
+    }
+    &__price {
+      text-align: right;
+    }
+
+    &__controls {
+      margin-top: 0.5rem;
+      text-align: right;
+      width: 100%;
+    }
+  }
+}
+
+.cart-controls {
+  &__status {
+    display: inline-block;
+    width: 2rem;
+    text-align: center;
+    font-weight: 700;
+    margin: 0 0.3rem;
+  }
+
+  &__btn {
+    padding: .375rem .75rem;
+    min-width: 2rem;
+    text-align: center;
+
+    &:hover {
+      background: rgba($color: #000, $alpha: 0.1);
+      color: #000;
+    }
+  }
+
+}
+
+.payment-type {
+  margin: 32px 0;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  font-weight: 700;
+  &__option {
+    margin: 0 2rem;
+    cursor: pointer;
+    transition: 200ms ease;
+    &:hover {
+      color: var(--yellow);
+      opacity: 0.8;
+    }
+    &.active {
+      color: var(--yellow);
+    }
+  }
+  &__icon {
+    font-size: 3rem;
+  }
+}

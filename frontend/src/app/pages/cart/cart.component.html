@@ -1,0 +1,94 @@
+<section class="cart">
+  <div class="container">
+    <h3>Cart</h3>
+    <div class="row" *ngIf="cartItems.length">
+      <div class="col-lg-8 mb-4">
+        <div class="cart__items" >
+          <div class="cart-item" *ngFor="let item of cartItems; let i = index">
+            <div class="cart-item__index">
+              {{ i+1 }}.
+            </div>
+            <div class="cart-item__profile">
+              <img [src]="'http://localhost:8000/storage/'+item.image" [alt]="item.title">
+            </div>
+            <div class="cart-item__title">
+              {{ item.title }}
+            </div>
+            <div class="cart-item__price">
+              {{ item.price | number:'1.0' }} UZS
+            </div>
+            <div class="cart-item__controls cart-controls">
+              <button class="cart-controls__btn btn" (click)="decrease(item)">
+                <fa-icon [icon]="faMinus"></fa-icon>
+              </button>
+              <span class="cart-controls__status">
+                {{ item.quantity }}
+              </span>
+              <button class="cart-controls__btn btn" (click)="add(item)">
+                <fa-icon [icon]="faPlus"></fa-icon>
+              </button>
+              <button class="cart-controls__btn btn btn-red ml-2" (click)="deleteItem(item.id)">
+                <fa-icon [icon]="faTrash"></fa-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="cart__status">
+          <h6 class="text-transparent">Total:</h6>
+          <h3>
+            {{ total | number:'1.0' }} UZS
+          </h3>
+          <button class="btn btn-action d-block mb-3" (click)="openModal(templateModal)">
+            Checkout <span class="ml-2">
+              <fa-icon [icon]="faArrowRight"></fa-icon>
+            </span>
+          </button>
+          <button class="btn btn-secondary" (click)="clearCart()">
+            Clear
+          </button>
+        </div>
+
+      </div>
+    </div>
+    <h5 class="text-center" *ngIf="!cartItems.length">
+      Oops! No items yet.
+    </h5>
+  </div>
+</section>
+<ng-template #templateModal>
+  <div class="modal-header">
+    <h3 class="modal-title pull-left">Checkout</h3>
+    <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()">
+      <fa-icon [icon]="faTimes"></fa-icon>
+    </button>
+  </div>
+  <div class="modal-body text-center">
+    <h6 class="font-weight-normal">Choose payment type: </h6>
+    <div class="payment-type">
+      <div class="payment-type__option" [ngClass]="{'active': paymentType == 'cash'}"  (click)="paymentType = 'cash'">
+        <div class="payment-type__icon">
+          <fa-icon [icon]="faMoneyBill"></fa-icon>
+        </div>
+        Cash
+      </div>
+      <div class="payment-type__option" [ngClass]="{'active': paymentType == 'card'}" (click)="paymentType = 'card'">
+        <div class="payment-type__icon">
+          <fa-icon [icon]="faCreditCard"></fa-icon>
+        </div>
+        Card
+      </div>
+    </div>
+    <div>
+      <button [disabled]="isLoading || paymentType === undefined" class="btn btn-action " (click)="checkout()">
+        <fa-icon [icon]="faCircleNotch" [spin]="true" *ngIf="isLoading"></fa-icon>
+        Checkout
+      </button>
+    </div>
+    <button class="btn btn-transparent mt-2" (click)="modalRef.hide()">
+      Back
+    </button>
+
+  </div>
+</ng-template>

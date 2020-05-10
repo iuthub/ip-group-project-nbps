@@ -1,9 +1,6 @@
 <div class="item-card">
   <div class="item-card__image">
-    <img 
-        [src]="'http://localhost:8000/storage/'+data.image" 
-        [alt]="data.title"
-    >
+    <img [src]="'http://localhost:8000/storage/'+data.image" [alt]="data.title">
   </div>
   <h5 class="item-card__title">
     {{ data.title }}
@@ -15,8 +12,17 @@
     <h6 class="item-card__price">
       {{ data.price | number:'1.0' }} UZS
     </h6>
-    <button class="btn btn-alternative item-card__cart">
-      Add to cart
-    </button>
+
+    <ng-container *ngIf="isInCart; else elseTemplate">
+      <button class="btn btn-red item-card__cart disabled" disabled>
+        In Cart
+      </button>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <button class="btn btn-alternative item-card__cart" (click)="addToCart()">
+        Add to cart
+      </button>
+    </ng-template>
+
   </div>
 </div>

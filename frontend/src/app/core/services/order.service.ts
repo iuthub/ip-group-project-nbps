@@ -7,9 +7,10 @@ import { Order } from '../models/order.model';
 import { Item } from '../models/item.model';
 import { NotificationService } from './notification.service';
 
+
 const API_DATA_URL = environment.serverUrl;
 
-enum paymentType{
+enum PaymentType{
   cash,
   card
 }
@@ -33,11 +34,12 @@ export class OrderService {
     return this.http.get<any>(url).pipe(
       catchError(error => this.notificationService.showError(error))
     );
-  }
+  };
+  
+  
   setOrder(data:{
-    payment_type: paymentType,
-    items: Array<Item[]>
-
+    payment_type: string,
+    items: any
   }): Observable<any> {
     const url = API_DATA_URL+"/order";
     return this.http.post<any>(url,data).pipe(

@@ -41,8 +41,8 @@
         </li>
       </ul>
       <div class="d-flex align-items-center justify-content-between">
-        <a href="/cart" class="btn btn-action">
-          Cart <b>(1)</b>
+        <a routerLink="/cart" class="btn btn-action" #cartBtn>
+          Cart <b>({{ cartItemsNumber }})</b>
         </a>
         <a *ngIf="isAuthenticated" [routerLink]="['/account']" class="btn btn-default d-inline-block d-md-none">
           Account

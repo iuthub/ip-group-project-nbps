@@ -11,6 +11,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { AuthGuard } from './core/guards/auth.guard';
 
 import { CategoryComponent } from './pages/category/category.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 
 const routes: Routes = [
@@ -26,8 +27,13 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   {
     path: 'account',
-    loadChildren: () => import('./pages/account/account.module').then(m => m.AccountModule), 
+    loadChildren: () => import('./pages/account/account.module').then(m => m.AccountModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'cart',
+    canActivate: [AuthGuard],
+    component: CartComponent,
   },
   { path: '**', component: ErrorComponent },  // Wildcard route for a 404 page
 ];
