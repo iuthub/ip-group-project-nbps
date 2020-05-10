@@ -272,6 +272,9 @@ section {
 
 @include lg {
 
+  body {
+    padding-top: 130px;
+  }
   .secondary-page {
     &__content {
       padding: 0 32px;
@@ -281,9 +284,7 @@ section {
 }
 
 @include md {
-  body {
-    padding-top: 130px;
-  }
+  
   .secondary-page {
     p {
       font-size: 1rem;

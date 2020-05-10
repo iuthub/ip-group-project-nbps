@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { DOMService } from 'src/app/core/services/dom.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { CategoryService } from 'src/app/core/services/category.service';
@@ -6,6 +6,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Router, NavigationEnd } from '@angular/router';
 import { CartService } from 'src/app/core/services/cart.service';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-header',
@@ -19,8 +21,10 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild("navTop", { static: false }) navTop: ElementRef<HTMLElement>;
   @ViewChild("hamburger", { static: false }) hamburger: ElementRef<HTMLElement>;
   @ViewChild("cartBtn", { static: false }) cartBtn: ElementRef<HTMLElement>;
-
-
+  
+  //Icon 
+  faSearch = faSearch;
+  
   isNavOpen = false;
   isAuthenticated = false;
   categories = [];
@@ -32,8 +36,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     private userService: UserService,
     private categoryService: CategoryService,
     private router: Router,
-    private cartService: CartService,
-    private cdr: ChangeDetectorRef,
+    private cartService: CartService
   ) {
 
     // To prevent loss of context in event Listener
@@ -56,7 +59,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
     //Mobile - Close nav on navigation 
-    if (window.matchMedia("screen and (max-width: 414px)").matches) {
+    if (window.matchMedia("screen and (max-width: 992px)").matches) {
       this.router.events.subscribe((res) => {
         if (res instanceof NavigationEnd) {
           this.nav.nativeElement.classList.remove("is-mobile-active");

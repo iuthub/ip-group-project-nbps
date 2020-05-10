@@ -19,7 +19,8 @@
           Login
         </a>
 
-        <div (click)="onHamburgerClick($event)" #hamburger class="hamburger hamburger--elastic d-inline-block d-lg-none">
+        <div (click)="onHamburgerClick($event)" #hamburger
+          class="hamburger hamburger--elastic d-inline-block d-lg-none">
           <div class="hamburger-box">
             <div class="hamburger-inner"></div>
           </div>
@@ -32,19 +33,21 @@
     <div class="container">
       <ul class="nav__categories" *ngIf="categories.length">
         <li *ngFor="let category of categories">
-          <a
-            routerLinkActive="active" 
-            routerLink="/category/{{ category.id }}" 
-            class="hover-link">
+          <a routerLinkActive="active" routerLink="/category/{{ category.id }}" class="hover-link">
             {{ category.title }}
           </a>
         </li>
         <li>
-          <a
-            routerLinkActive="active" 
-            routerLink="/booking" 
-            class="hover-link">
+          <a routerLinkActive="active" routerLink="/booking" class="hover-link">
             Booking
+          </a>
+        </li>
+        <li>
+          <a routerLinkActive="active" routerLink="/search" class="hover-link">
+            <i class="mr-2">
+              <fa-icon [icon]="faSearch"></fa-icon>
+            </i>
+            Search
           </a>
         </li>
       </ul>

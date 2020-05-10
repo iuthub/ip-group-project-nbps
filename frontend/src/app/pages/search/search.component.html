@@ -1,0 +1,35 @@
+<section class="search">
+  <div class="container">
+    <div class="row align-items-center mb-5">
+      <div class="col-lg-2 mb-4 mb-lg-0">
+        <h3>
+          Search:
+        </h3>
+      </div>
+      <div class="col-lg-4 ml-lg-2">
+        <form (submit)="onSubmit($event)">
+          <input class="form-control" placeholder="What do you want to eat?" [(ngModel)]="search" #ctrl="ngModel"
+            [ngModelOptions]="{standalone: true}">
+          <button (click)="onSubmit($event)" class="btn btn-action">
+            <fa-icon [icon]="faSearch"></fa-icon>
+          </button>
+        </form>
+
+      </div>
+    </div>
+    <ng-container *ngIf="isLoading; else elseLoading">
+      <app-loading></app-loading>
+    </ng-container>
+    <ng-template #elseLoading>
+      <div class="row" *ngIf="items.length; else elseBlock">
+        <div class="col-lg-4 col-md-6" *ngFor="let item of items">
+          <app-item-card [data]="item"></app-item-card>
+        </div>
+      </div>
+      <ng-template #elseBlock>
+        <h3 class="text-center mt-5 mb-5">No results</h3>
+      </ng-template>
+    </ng-template>
+  </div>
+
+</section>
