@@ -3,10 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Auth;
 
 class BookTableFormRequest extends FormRequest
 {
@@ -29,12 +29,12 @@ class BookTableFormRequest extends FormRequest
     {
         return [
             'book_date' => 'required|date_format:Y-m-d',
-            'book_time' => 'required|date_format:H:i',
+            'book_time' => 'required|date_format:H:i:s',
             'people_count' => 'required|numeric'
         ];
     }
 
-    protected function failedAuthorization(Validator $validator)
+    protected function failedValidation(Validator $validator)
     {
         if ($this->wantsJson()) {
             throw new HttpResponseException(response()->json([

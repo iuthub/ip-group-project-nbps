@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Api;
 use App\Table;
 use App\Booking;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\BookTableFormRequest;
 use Illuminate\Http\Response;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\BookTableFormRequest;
+use App\Http\Requests\OrderStoreFormRequest;
 
 class BookingController extends Controller
 {
@@ -32,13 +33,9 @@ class BookingController extends Controller
             ]);
         }
         $user = Auth::guard('api')->user();
-        if (!$user->bookings()->create(array_merge($request->all(), [
+        $user->bookings()->create(array_merge($request->all(), [
             'table_id' => $table->id
-        ]))) {
-            return response()->json([
-                'message' => 'Unable to perform action'
-            ], Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
+        ]));
         return response()->json([
             'message' => 'Booking has been saved'
         ], Response::HTTP_OK);

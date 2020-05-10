@@ -9,7 +9,7 @@
               {{ i+1 }}.
             </div>
             <div class="cart-item__profile">
-              <img [src]="'http://localhost:8000/storage/'+item.image" [alt]="item.title">
+              <img [src]="storageUrl+item.image" [alt]="item.title">
             </div>
             <div class="cart-item__title">
               {{ item.title }}
