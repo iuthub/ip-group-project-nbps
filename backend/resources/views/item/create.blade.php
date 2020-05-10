@@ -4,7 +4,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <form method="post" action="{{ route('item.store') }}">
+      <form method="post" action="{{ route('item.store') }}" enctype="multipart/form-data">
         <div class="form-group">
           @csrf
           <label>Name</label>
@@ -19,9 +19,13 @@
           <input type="text" class="form-control" name="price" placeholder="Price" />
         </div>
         <div class="form-group">
+          <label>Image</label>
+          <input type="file" name="image" class="form-control-file">
+        </div>
+        <div class="form-group">
           <label>Category</label>
           <select name="category_id" class="custom-select">
-            <option>Select category</option>
+            <option value="">Select category</option>
             @foreach ($categories as $category)
             <option value="{{$category->id}}">{{$category->title}}</option>
             @endforeach

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Item;
 use App\Category;
+use Illuminate\Support\Facades\Storage;
 
 class ItemController extends Controller
 {
@@ -46,13 +47,17 @@ class ItemController extends Controller
             'title' => 'required',
             'description' => 'required',
             'price' => 'required|numeric',
-            'category_id' => 'required|numeric'
+            'category_id' => 'required|numeric',
+            'image' => 'required|image'
         ]);
 
+        $imageFile = $request->file('image');
+        $imageFileName = $imageFile->store('img', 'public');
+
         $item = Item::create(array_merge($request->all(), [
-            'image' => Item::getDefaultPhotoURL()
+            'image' => $imageFileName
         ]));
-        return redirect()->rotue('item.index')->with([
+        return redirect()->route('item.index')->with([
             'success' => __('flash.success.store', ['model' => 'Item'])
         ]);
     }
@@ -81,15 +86,22 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item)
     {
-        $this->validate($request, [
+        $fillData = $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
             'price' => 'required|numeric',
             'category_id' => 'required|numeric',
+            'image' => 'nullable|image'
         ]);
-        $item->update(array_merge($request->all(), [
-            'image' => Item::getDefaultPhotoURL()
-        ]));
+        if ($imageFile = $request->file('image')) {
+            if (Storage::disk('public')->exists($item->image)) {
+                Storage::disk('public')->delete($item->image);
+            } else {
+                $imgFileName = $imageFile->store('img', 'public');
+                $fillData['image'] = $imgFileName;
+            }
+        }
+        $item->update($fillData);
         return redirect()->route('item.index')->with([
             'success' => __('flash.success.update', ['model' => 'Item'])
         ]);

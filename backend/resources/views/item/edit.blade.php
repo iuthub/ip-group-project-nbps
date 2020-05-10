@@ -4,7 +4,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <form method="post" action="{{ route('item.update', $item->id) }}">
+      <form method="post" action="{{ route('item.update', $item->id) }}" enctype="multipart/form-data">
         <div class="form-group">
           @csrf
           <label>Title</label>
@@ -17,6 +17,10 @@
         <div class="form-group">
           <label>Price</label>
           <input type="text" class="form-control" name="price" placeholder="Price" value="{{$item->price}}" />
+        </div>
+        <div class="form-group">
+          <label>Image</label>
+          <input type="file" name="image" class="form-control-file">
         </div>
         <div class="form-group">
           <label>Category</label>
