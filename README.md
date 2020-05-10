@@ -64,9 +64,9 @@ php artisan serve
 
 ---
 
-[Demo version (admin panel)](https://herokuapp.com)
+[Demo version (admin panel)](http://161.35.29.230)
 
-[Demo version (front)](https://herokuapp.com)
+[Demo version (front)](http://161.35.29.230:5000)
 
 ## REST API Endpoints
 
@@ -88,6 +88,7 @@ php artisan serve
 | _yes_       | POST   | `http://{domain}/api/order`                     | **payment_type (enum: cash, card), items (array)**                                      | Place an order                          |
 | _yes_       | GET    | `http://{domain}/api/bookings`                  |                                                                                         | Lost all bookings by authenticated user |
 | _yes_       | POST   | `http://{domain}/api/book/table/{table}`        |                                                                                         | Book a table by ID                      |
+| _no_        | GET    | `http://{domain}/api/items/search`              | **title**                                                                               | Seach items by title                    |
 
 ### All routes requiring authorization accepts Bearer Token passed by header parameter
 
@@ -109,3 +110,15 @@ Authorization: Bearer <token>
     ]
 }
 ```
+
+## Test credentials
+
+#### Administrator
+
+- Email: admin@site.local
+- Password: administrator
+
+#### User
+
+- Email: test@site.local
+- Password: password
