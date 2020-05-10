@@ -9,6 +9,8 @@ export class Booking implements Deserializable {
   book_time: string;
   user: User;
   table: Table;
+  created_at: string;
+  updated_at: string;
 
   deserialize(input: any): this {
     Object.assign(this, input);

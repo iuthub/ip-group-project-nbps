@@ -4,6 +4,7 @@ import { Profile } from 'src/app/core/models/profile.model';
 import { User } from 'src/app/core/models/user.model';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { OrderService } from 'src/app/core/services/order.service';
 
 @Component({
   selector: 'app-general-info',
@@ -17,9 +18,14 @@ export class GeneralInfoComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-  ) { }
-  accountInfo;
+  ) { };
+  
+  
+  accountInfo : any;
+  
   isLoading = true;
+ 
+  
   ngOnInit(): void {
     this.userService.getUserInfo().pipe(takeUntil(this.destroy)).subscribe(
       (res) => {
@@ -27,6 +33,12 @@ export class GeneralInfoComponent implements OnInit {
         this.isLoading = false;
       })
 
+  }
+  
+  
+  ngOnDestroy() {
+    this.destroy.next();
+    this.destroy.complete();
   }
 
 }

@@ -23,7 +23,7 @@ export class OrderService {
   constructor(private http: HttpClient, private notificationService: NotificationService) { }
 
 
-  getAllOrders(): Observable<Order[]> {
+  getAllOrders(): Observable<{orders: Order[]}> {
     const url = API_DATA_URL+"/orders"
     return this.http.get<any>(url).pipe(
       catchError(error => this.notificationService.showError(error))
